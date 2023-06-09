@@ -54,10 +54,11 @@ export default function UserData() {
     getDocs(q)
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
+          const existingData = doc.data();
           const newData = {
-            firstName: FName,
-            secondName: SName,
-            phone: Phone,
+            firstName: FName || existingData.firstName,
+            secondName: SName || existingData.secondName,
+            phone: Phone || existingData.phone,
           };
 
           updateDoc(doc.ref, newData)

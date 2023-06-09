@@ -36,12 +36,16 @@ export function NavBarLoggedIn() {
           </Link>
         </li>
         <li>
-          <Link href='/nav/EditProfile'>
-            <div>Edit profile</div>
+          <Link href='/nav/Logout'>
+            <div>Logout</div>
+          </Link>
+        </li>
+        <li>
+          <Link href='/nav/Profile'>
+            <img src='/media/profile.jpg' alt='Settings' width='30' height='30'/>
           </Link>
         </li>
       </ul>
     </>
   )
 }
-

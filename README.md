@@ -22,3 +22,4 @@
 - [ ] 5
 
 There maybe other things which im forgetting so just add if you can think of any.
+FAQ page 

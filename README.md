@@ -14,12 +14,12 @@
    - leave reviews on a client this will probs be after mvp 
 4. All styling of site
 5. Subscriptions
+6. FAQ Page
 
 - [ ] 1
 - [ ] 2
 - [ ] 3
 - [ ] 4
 - [ ] 5
-
+- [ ] 6
 There maybe other things which im forgetting so just add if you can think of any.
-FAQ page 

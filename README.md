@@ -15,6 +15,7 @@
 4. All styling of site
 5. Subscriptions
 6. FAQ Page
+7. a seaech bar so the client doesnt have to scroll throughout our website go find a specific trader. E.g  searched electricion snd all fof the electricion come up 
 
 - [ ] 1
 - [ ] 2

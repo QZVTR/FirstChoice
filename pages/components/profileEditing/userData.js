@@ -131,7 +131,7 @@ export default function UserData() {
 
   const handleSubmitTrader = (e) => {
     e.preventDefault();
-    const jobsAvailUpdate = []
+    
 
     const q = query(collection(db, 'Traders'), where('email', '==', user.email));
 

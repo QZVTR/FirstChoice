@@ -71,7 +71,7 @@ export function SecondSearch({ trade }) {
                             <option value='bathroom installation'>Bathroom Installation</option>
                             <option value='guttering and pipes repair'>Guttering/Pipes Repair</option>
                             <option value='plumbing repair'>Plumbing repair</option>
-                            <option value='24 hour plumber'>Emergency/24 hour plumber</option>
+                            <option value='twenty four hour plumber'>Emergency/24 hour plumber</option>
                             <option value='kitchen plumbing'>Kitchen Plubming</option>
                         </select>
                 </div>

@@ -3,6 +3,7 @@ import { auth, db } from '../../firebase'
 import Layout from '../Layout'
 import Link from 'next/link'
 import { collection, query, where, getDocs } from 'firebase/firestore';
+import { v4 } from 'uuidv4';
 
 export default function Profile() {
 
@@ -14,6 +15,21 @@ export default function Profile() {
   const [email, setEmail] = useState('');
   const [companyName, setCompanyName] = useState();
   const [bio, setBio] = useState();
+  const [jobsAvail, setJobsAvail] = useState([]);
+  
+  function capitalizeWords(str) {
+    const words = str.split(' ');
+  
+    const capitalizedWords = words.map((word) => {
+      const firstLetter = word.charAt(0).toUpperCase();
+      const restOfWord = word.slice(1);
+      return `${firstLetter}${restOfWord}`;
+    });
+  
+    return capitalizedWords.join(' ');
+  }
+  
+
 
   useEffect(() => {
     const getUserDataCust = async () => {
@@ -62,6 +78,7 @@ export default function Profile() {
         setCompanyName(userData.companyName);
         setBio(userData.bio);
         setEmail(userData.email)
+        setJobsAvail(userData.jobsAvail)
       }
     };
 
@@ -70,6 +87,7 @@ export default function Profile() {
       }
   },[user])
 
+  console.log(jobsAvail)
   return (
     <Layout>
       <h2>Profile</h2>
@@ -83,6 +101,15 @@ export default function Profile() {
         <div>Phone number: {phone}</div>
         {companyName ? <div>Company name: {companyName}</div> : null}
         {bio ? <div>About: {bio}</div> : null}
+        <h4>Services we offer: </h4>
+        {jobsAvail ?
+          <div>
+            {jobsAvail && jobsAvail.map((job, index) => (
+              <div key={index}>{capitalizeWords(job)}</div>
+            ))}
+          </div>
+          : null
+        }
       </div>
     </Layout>
   )

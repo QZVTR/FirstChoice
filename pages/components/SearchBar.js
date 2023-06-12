@@ -156,7 +156,7 @@ export function SecondSearch({ trade }) {
                             <option value='burglar repair'>Burglar Repair</option>
                             <option value='door opening'>Door Opening</option>
                             <option value='door replacement'>Door Replacement</option>
-                            <option value='emergency 24 hour locksmith'>Emergency 24 hour locksmith</option>
+                            <option value='emergency twenty four hour locksmith'>Emergency 24 hour locksmith</option>
                             <option value='lock fitting repair'>Lock Fitting/Repair</option>
                         </select>
                 </div>

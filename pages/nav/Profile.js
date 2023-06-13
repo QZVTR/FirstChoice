@@ -95,6 +95,12 @@ export default function Profile() {
         <img src='/media/EditProfile.jpg' alt='Edit Profile' height='30' width='30'/>
       </Link>
       <div>
+        <Link href={`/components/UserQuotes/${email}`}>
+          View your requested quotes
+        </Link>
+      </div>
+      <br />
+      <div>
         <div>Name: {fName} {sName}</div>
         
         <div>Email: {email}</div>

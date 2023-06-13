@@ -43,7 +43,8 @@ export default function User() {
         });
       
         return capitalizedWords.join(' ');
-      }
+    }
+
 
     return (
         <Layout>
@@ -69,11 +70,17 @@ export default function User() {
                 </div>
                 </div>
 
-                <div>
+                {auth.currentUser ? <div>
                     <Link href={`/QuotePage?tradeId=${userData.id}&clientId=${user.email}`}>
                         <button>Get a quote</button>
                     </Link>
+                </div> : 
+                <div>
+                    <h3>You must login to view a traders account</h3>
                 </div>
+                }
+
+                
 
                 <div>
                     <SpecificReviews id={id} />

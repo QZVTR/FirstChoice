@@ -16,6 +16,7 @@ export default function Profile() {
   const [companyName, setCompanyName] = useState();
   const [bio, setBio] = useState();
   const [jobsAvail, setJobsAvail] = useState([]);
+  const [userType, setUserType] = useState();
   
   function capitalizeWords(str) {
     const words = str.split(' ');
@@ -49,6 +50,7 @@ export default function Profile() {
         setSName(userData.secondName);
         setPhone(userData.phone);
         setEmail(userData.email)
+        setUserType('Customer')
       }
     };
 
@@ -79,6 +81,7 @@ export default function Profile() {
         setBio(userData.bio);
         setEmail(userData.email)
         setJobsAvail(userData.jobsAvail)
+        setUserType('Trader')
       }
     };
 
@@ -94,11 +97,14 @@ export default function Profile() {
       <Link href='/components/EditProfile'>
         <img src='/media/EditProfile.jpg' alt='Edit Profile' height='30' width='30'/>
       </Link>
-      <div>
+      {userType === 'Trader' ? <div>
         <Link href={`/components/UserQuotes/${email}`}>
           View your requested quotes
         </Link>
-      </div>
+      </div> :
+      null
+      }
+      
       <br />
       <div>
         <div>Name: {fName} {sName}</div>

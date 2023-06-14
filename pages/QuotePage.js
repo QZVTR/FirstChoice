@@ -4,6 +4,7 @@ import { auth, db } from '../firebase'
 import { uuid } from 'uuidv4';
 import { query, collection, where, serverTimestamp, getDocs, updateDoc, FieldValue, Timestamp } from 'firebase/firestore';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 //We will alert the trader via email that they have a new quote request 
 //It will create a current quote section on their page
@@ -13,6 +14,7 @@ import Link from 'next/link';
 
 export default function QuotePage() {
 
+  const router = useRouter();
   const url = new URL(window.location.href);
   const searchParams = new URLSearchParams(url.search);
 
@@ -22,6 +24,9 @@ export default function QuotePage() {
   const quoteDetailsRef = useRef();
   const quoteTimeframeRef = useRef();
   const quoteJobTitleRef = useRef();
+  const quotePropertyAuthStatusRef = useRef();
+  const quoteBudgetRef = useRef();
+
 
   const [quoteSubmitError, setQuoteSubmitError] = useState(null);
 
@@ -31,10 +36,11 @@ export default function QuotePage() {
     console.log(quoteJobTitleRef.current.value);
     console.log(quoteTimeframeRef.current.value);
     
-    if (!quoteDetailsRef.current.value || !quoteJobTitleRef.current.value || quoteTimeframeRef.current.value === "Choose here") {
+    if (!quoteDetailsRef.current.value || !quoteJobTitleRef.current.value || quoteTimeframeRef.current.value === "Choose here" || quoteBudgetRef.current.value === 'Choose here' || quotePropertyAuthStatusRef.current.value === "Choose here") {
       setQuoteSubmitError('Please enter all fields')
     } else {
       sendQuote()
+      router.push('/components/SuccessQuotePage')
     } 
   }
 
@@ -48,7 +54,7 @@ export default function QuotePage() {
   
       if (!querySnapshot.empty) {
         const docRef = querySnapshot.docs[0].ref;
-        const currentArray = querySnapshot.docs[0].data().activeQuotes;
+        const currentArray = querySnapshot.docs[0].data().activeQuotes || [];
   
         const newObject = {
           quoteId: quoteId,
@@ -56,9 +62,11 @@ export default function QuotePage() {
           quoteDetails: quoteDetailsRef.current.value,
           quoteTimeframe: quoteTimeframeRef.current.value,
           quoteTitle: quoteJobTitleRef.current.value,
+          quotePropertyAuthStatus: quotePropertyAuthStatusRef.current.value,
+          quoteBudget: quoteBudgetRef.current.value,
           quoteTimestamp: Timestamp.now()
         };
-  
+        console.log(newObject)
         currentArray.push(newObject);
   
         await updateDoc(docRef, { activeQuotes: currentArray });
@@ -76,18 +84,49 @@ export default function QuotePage() {
     <Layout>
         <div>Quote:</div>
         <form onSubmit={handleSubmit}>
+          <div>
           <label htmlFor='jobTitle' >Title your request: </label>
           <input name='jobTitle' placeholder='Enter here:' ref={quoteJobTitleRef} />
+          </div>
+          <div>
           <label htmlFor='jobDescription' >Tell us about the job you need doing? </label>
           <input ref={quoteDetailsRef} name='jobDescription' placeholder='Enter here:' />
+          </div>
+          <div>
           <label htmlFor='jobTimeFrame'>When do you need the job done? </label>
           <select defaultValue='Choose here' name='jobTimeFrame' ref={quoteTimeframeRef}>
             <option value='Choose here' disabled hidden>Choose here</option>
             <option value='In Twenty Four Hours'>In 24 hours</option>
             <option value='Two to Three Days'>2-3 days</option>
             <option value='Five to Seven Days'>5-7 days</option>
-            <option value='Seven Plus Days'>7+ days</option>
+            <option value='Within two weeks'>Within 2 weeks</option>
+            <option value='Within a month'>Within a month</option>
+            <option value='1 month+'>1 month+</option>
+            <option value='Flexible start date' >Flexible start date</option>
           </select>
+          </div>
+          <div>
+          <label htmlFor='propertyAuthStatus' >Are you authorised to make changes to the property</label>
+          <select defaultValue='Choose here' name='propertyAuthStatus' ref={quotePropertyAuthStatusRef}>
+            <option value='Choose here' disabled hidden >Choose here</option>
+            <option value='Client owns and lives at the property'>I own and live at this property</option>
+            <option value='Client is the landlord'>I am the landlord</option>
+            <option value='Client rents but is authorised to make changes to the property'>I rent this property but I am authorised to make changes</option>
+          </select>
+          </div>
+          <div>
+          <label>What is your budget for this job? (Don't worry you are not commiting to this price) </label>
+          <select defaultValue='Choose here' name='quoteBudget' ref={quoteBudgetRef}>
+            <option value='Choose here' disabled hidden>Choose here</option>
+            <option value='Under £200'>Under £200</option>
+            <option value='Under £500'>Under £500</option>
+            <option value='Under £1,000'>Under £1,000</option>
+            <option value='Under £2,000'>Under £2,000</option>
+            <option value='Under £5,000'>Under £5,000</option>
+            <option value='Over £5,000'>Over £5,000</option>
+          </select>
+          </div>
+
           {auth.currentUser ? <input type='submit' value='Submit'/> : 
             <button>
               <Link href='/nav/Login'>

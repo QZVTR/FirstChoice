@@ -13,6 +13,7 @@ export default function User() {
     const user = auth.currentUser
     const router = useRouter();
     const { id } = router.query;
+    const [ custUsers, setCustUsers] = useState([]);
     
     useEffect(() => {
         const getUserData = async () => {
@@ -31,6 +32,23 @@ export default function User() {
         };
         getUserData();
     },[id])
+
+    
+  useEffect(() => {
+    const getUsersCust = async () => {
+      const querySnapshot = await getDocs(collection(db, 'Customers'));
+      const custs = [];
+      querySnapshot.forEach((doc) => {
+        custs.push(doc.data().email);
+      });
+      setCustUsers(custs);
+    };
+
+    if (auth.currentUser) {
+        getUsersCust();
+    }
+    
+  }, [user]);
 
 
     function capitalizeWords(str) {
@@ -70,13 +88,13 @@ export default function User() {
                 </div>
                 </div>
 
-                {auth.currentUser ? <div>
+                {auth.currentUser && custUsers.includes(auth.currentUser.email.toLowerCase()) ? <div>
                     <Link href={`/QuotePage?tradeId=${userData.id}&clientId=${user.email}`}>
                         <button>Get a quote</button>
                     </Link>
                 </div> : 
                 <div>
-                    <h3>You must login to view a traders account</h3>
+                    <h3>You must login to a customers account to receive a quote</h3>
                 </div>
                 }
 

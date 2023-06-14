@@ -34,7 +34,7 @@ export default function Profile() {
 
   useEffect(() => {
     const getUserDataCust = async () => {
-      const q = query(collection(db, 'Customers'), where('email', '==', user.email));
+      const q = query(collection(db, 'Customers'), where('email', '==', user.email.toLowerCase()));
       const querySnapshot = await getDocs(q);
 
       if (querySnapshot.empty) {

@@ -16,12 +16,12 @@ export default function JobPage() {
 
     const user = auth.currentUser
 
-    const jobTitleRef = useRef(null);
-    const jobDetailsRef = useRef(null);
-    const jobTimeframeRef = useRef(null);
-    const jobPropertyAuthStatusRef = useRef(null);
-    const jobBudgetRef = useRef(null);
-    const jobTraderTypeRef = useRef(null);
+    const jobTitleRef = useRef();
+    const jobDetailsRef = useRef();
+    const jobTimeframeRef = useRef();
+    const jobPropertyAuthStatusRef = useRef();
+    const jobBudgetRef = useRef();
+    const jobTraderTypeRef = useRef();
 
     const [errorMessage, setErrorMessage] = useState("");
 
@@ -44,7 +44,11 @@ export default function JobPage() {
             const docRef = querySnapshot.docs[0].ref;
             const currentData = querySnapshot.docs[0].data();
             let currentArray = currentData.activeJobPosts || [];
-      
+            console.log('job type ref' + jobTraderTypeRef.current.value)
+            console.log('details ref' + jobDetailsRef.current.value)
+            console.log('timeframe ref' + jobTimeframeRef.current.value)
+            console.log('title ref' + jobTitleRef.current.value)
+            console.log('budget ref' + jobBudgetRef.current.value)
             const newObject = {
               jobId: jobId,
               jobTraderType: jobTraderTypeRef.current.value,

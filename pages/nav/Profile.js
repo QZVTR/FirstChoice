@@ -118,13 +118,16 @@ export default function Profile() {
         <div>Phone number: {phone}</div>
         {companyName ? <div>Company name: {companyName}</div> : null}
         {bio ? <div>About: {bio}</div> : null}
-        <h4>Services we offer: </h4>
+        
+        {userType === 'Trader' ? <h4>Services we offer: </h4> : null}
         {jobsAvail ?
+          <>
           <div>
             {jobsAvail && jobsAvail.map((job, index) => (
               <div key={index}>{capitalizeWords(job)}</div>
             ))}
           </div>
+          </>
           : null
         }
       </div>

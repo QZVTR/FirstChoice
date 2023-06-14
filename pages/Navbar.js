@@ -11,6 +11,11 @@ export default function Navbar() {
         </Link>
       </li>
       <li className={styles.navItem}>
+        <Link href='/nav/Jobs'>
+          <div className={styles.navLink}>Jobs</div>
+        </Link>
+      </li>
+      <li className={styles.navItem}>
         <Link href='/nav/SignUp'>
           <div className={styles.navLink}>Sign up</div>
         </Link>
@@ -31,6 +36,11 @@ export function NavBarLoggedIn() {
       <li className={styles.navItem}>
         <Link href='/'>
           <div className={styles.navLink}>Home</div>
+        </Link>
+      </li>
+      <li className={styles.navItem}>
+        <Link href='/nav/Jobs'>
+          <div className={styles.navLink}>Jobs</div>
         </Link>
       </li>
       <li className={styles.navItem}>

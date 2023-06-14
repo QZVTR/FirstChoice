@@ -104,6 +104,11 @@ export default function Profile() {
       </div> :
       null
       }
+      {userType === 'Customer' ? <div>
+        <Link href={`/components/UserJobPosts/${email}`}>
+          View your active job posts
+        </Link>
+      </div> : null}
       
       <br />
       <div>

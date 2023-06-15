@@ -104,7 +104,7 @@ export default function UserQuotes() {
             <div>Clients email to correspond with: {quote.clientEmail}</div>
             <div>Job details: {quote.quoteDetails}</div>
             <div>Job urgency: {quote.quoteTimeframe}</div>
-            <div>Clients property status: {quote.quotePropertyAuthStatus}</div>
+            <div>Clients property status: {quote.quotePropertyAuthStatus}.</div>
             <div>Clients job budget: {quote.quoteBudget}</div>
             <form>
               <label htmlFor='Remove Quote'>Remove: </label>

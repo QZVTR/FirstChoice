@@ -88,16 +88,16 @@ export default function UserJobPosts() {
     <Layout>
       {userJobsArr.length !== 0 ? 
       <>
-      <h3>Your active quotes:</h3>
+      <h3>Your active job posts:</h3>
       <div>
         {userJobsArr.map((job) => (
           <div key={job.jobId}>
             <div>Job Title: {job.jobTitle}</div>
-            <div>Clients email to correspond with: {job.clientEmail}</div>
-            <div>Job details: {job.jobDetails}</div>
+            <div>Your email: {email}</div>
+            <div>Details about your job: {job.jobDetails}</div>
             <div>Job urgency: {job.jobTimeframe}</div>
-            <div>Clients property status: {job.jobPropertyAuthStatus}</div>
-            <div>Clients job budget: {job.jobBudget}</div>
+            <div>Your property status: {job.jobPropertyAuthStatus}.</div>
+            <div>Your budget for this job: {job.jobBudget}</div>
             <form>
               <label htmlFor='Remove job'>Remove: </label>
               <input 

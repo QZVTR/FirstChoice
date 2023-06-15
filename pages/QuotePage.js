@@ -15,20 +15,28 @@ import { useRouter } from 'next/router';
 export default function QuotePage() {
 
   const router = useRouter();
-  const url = new URL(window.location.href);
-  const searchParams = new URLSearchParams(url.search);
-
-  const clientId = searchParams.get('clientId');
-  const tradeId = searchParams.get('tradeId');
-
+  
   const quoteDetailsRef = useRef();
   const quoteTimeframeRef = useRef();
   const quoteJobTitleRef = useRef();
   const quotePropertyAuthStatusRef = useRef();
   const quoteBudgetRef = useRef();
 
-
+ 
   const [quoteSubmitError, setQuoteSubmitError] = useState(null);
+
+  const [clientId, setClientId] = useState(null);
+  const [tradeId, setTradeId] = useState(null);
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const clientId = urlParams.get('clientId');
+    const tradeId = urlParams.get('tradeId');
+
+    // Set the retrieved query parameters in the component state
+    setClientId(clientId);
+    setTradeId(tradeId);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

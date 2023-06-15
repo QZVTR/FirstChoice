@@ -9,10 +9,9 @@ export default function JobPage() {
 
     const router = useRouter();
 
-    const url = new URL(window.location.href);
-    const searchParams = new URLSearchParams(url.search);
+    
 
-    const email = searchParams.get('s')
+    const [email, setEmail] = useState();
 
     const user = auth.currentUser
 
@@ -22,8 +21,16 @@ export default function JobPage() {
     const jobPropertyAuthStatusRef = useRef();
     const jobBudgetRef = useRef();
     const jobTraderTypeRef = useRef();
-
+ 
     const [errorMessage, setErrorMessage] = useState("");
+
+    useEffect(() => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const email = urlParams.get('s');
+        setEmail(email)
+        // Use the retrieved email parameter as needed
+        
+      }, []);
 
     if (!user) {
         return (

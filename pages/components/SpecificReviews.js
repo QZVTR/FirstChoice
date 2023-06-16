@@ -216,3 +216,33 @@ const StarRatingDisplay = ({ rating }) => {
     </div>
   );
 };
+
+export const StarRatingDisplayArr = ({ ratings }) => {
+  const calculateAverageRating = () => {
+    if (ratings.length === 0) {
+      return 0;
+    }
+
+    const sum = ratings.reduce((total, rating) => total + rating, 0);
+    return sum / ratings.length;
+  };
+
+  const averageRating = calculateAverageRating();
+
+  const stars = [1, 2, 3, 4, 5];
+
+  return (
+    <div className={styles.starRating}>
+      Average Rating: 
+      {stars.map((star) => (
+        <span
+          key={star}
+          className={star <= averageRating ? styles.starFilled : styles.starEmpty}
+        >
+          &#9733;
+        </span>
+      ))}
+      
+    </div>
+  );
+};

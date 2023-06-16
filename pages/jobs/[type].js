@@ -7,6 +7,7 @@ import styles from '../../styles/Homepage.module.css'
 import Link from 'next/link';
 import SearchBar from '../components/SearchBar';
 import { useRouter } from 'next/router';
+import { StarRatingDisplayArr } from '../components/SpecificReviews';
 
 export default function Type() {
   const [traders, setTraders] = useState([]);
@@ -62,6 +63,7 @@ export default function Type() {
             <h3 className={styles.title}>{trader.firstName} {trader.secondName}</h3>
             <h4 className={styles.subtitle}>{trader.companyName}</h4>
             <p className={styles.description}>{trader.bio}</p>
+            <StarRatingDisplayArr ratings={trader.starRating}/>
           </Link>
         </div>
       ))}
@@ -69,3 +71,6 @@ export default function Type() {
     </Layout>
   )
 }
+
+
+

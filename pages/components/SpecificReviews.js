@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 
-import { collection, query, orderBy, onSnapshot, where, addDoc, serverTimestamp, updateDoc, increment, setDoc, doc, arrayUnion } from "firebase/firestore";
+import { collection, query, orderBy, onSnapshot, where, getDocs, serverTimestamp, updateDoc, increment, setDoc, doc, arrayUnion } from "firebase/firestore";
 import { db, auth } from '../../firebase';
 import { v4 as uuidv4 } from 'uuid';
 import styles from '../../styles/Reviews.module.css'
@@ -13,6 +13,7 @@ export default function SpecificReviews({ id }) {
     const [reviews, setReviews] = useState([]);
     const [makeReview, setMakeReviews] = useState("");
     const [reviewTitle, setReviewTitle] = useState("");
+    const [starRating, setStarRating] = useState(null);
     
     useEffect(() => {
         const fetchReviews = () => {
@@ -31,6 +32,27 @@ export default function SpecificReviews({ id }) {
         fetchReviews();
     },[])
 
+    const updateUserDoc = async (traderId, starRating) => {
+      try {
+        const q = query(collection(db, 'Traders'), where('id', '==', traderId));
+        const querySnapshot = await getDocs(q);
+    
+        if (!querySnapshot.empty) {
+          const docRef = querySnapshot.docs[0].ref;
+          const currentData = querySnapshot.docs[0].data();
+          const currentStarRatings = currentData.starRating || [];
+          
+          currentStarRatings.push(starRating);
+          await updateDoc(docRef, { starRating: currentStarRatings });
+          console.log('Trader profile successfully updated with star rating!');
+        } else {
+          console.log('Trader profile not found!');
+        }
+      } catch (error) {
+        console.error('Error updating trader profile: ', error);
+      }
+    };
+
 
     const sendReview = async (title) => {
         const reviewId = uuidv4();
@@ -43,7 +65,8 @@ export default function SpecificReviews({ id }) {
             review: makeReview,
             flagCount: 0,
             flaggedBy: [],
-            date_time: serverTimestamp()
+            date_time: serverTimestamp(),
+            starRating: starRating
         }
 
         const docRef = await setDoc(doc(db, 'Reviews', reviewId), data);
@@ -70,9 +93,11 @@ export default function SpecificReviews({ id }) {
         e.preventDefault();
         console.log(makeReview);
         if (!languageChecker(makeReview)) {
+            updateUserDoc(id, starRating)
             sendReview(reviewTitle)
             setMakeReviews("");
             setReviewTitle("");
+            setStarRating(null);
         }else {
             alert('Review contains bad language');
         }
@@ -98,6 +123,11 @@ export default function SpecificReviews({ id }) {
         }
     }
 
+    const handleStarClick = (rating) => {
+      setStarRating(rating);
+    };
+  
+
     return (
         <div className={styles.reviewBox}>
           <p className={styles.reviewTitle}><b><u>User Reviews</u></b></p>
@@ -112,6 +142,7 @@ export default function SpecificReviews({ id }) {
                     <p className={styles.reviewUser}><b>{review.user}</b></p>
                     <p>Review Title: {review.titleDisplay}</p>
                     <p className={styles.reviewData}>Review: {review.review}</p>
+                    <StarRatingDisplay rating={review.starRating}/>
                     <img
                       className={styles.flagReview}
                       src='/media/FlagReview.png'
@@ -141,9 +172,47 @@ export default function SpecificReviews({ id }) {
                 placeholder='Enter Review'
                 className={styles.newData}
               />
+              <StarRating rating={starRating} onStarClick={handleStarClick}/>
               <input type='submit' value='Submit' className={styles.submit} />
             </form>
           </div>
         </div>
       );
 }
+
+
+// StarRating component
+const StarRating = ({ rating, onStarClick }) => {
+  const stars = [1, 2, 3, 4, 5];
+
+  return (
+    <div className={styles.starRating}>
+      {stars.map((star) => (
+        <span
+          key={star}
+          className={star <= rating ? styles.starFilled : styles.starEmpty}
+          onClick={() => onStarClick(star)}
+        >
+          &#9733;
+        </span>
+      ))}
+    </div>
+  );
+};
+
+const StarRatingDisplay = ({ rating }) => {
+  const stars = [1, 2, 3, 4, 5];
+
+  return (
+    <div className={styles.starRating}>
+      {stars.map((star) => (
+        <span
+          key={star}
+          className={star <= rating ? styles.starFilled : styles.starEmpty}
+        >
+          &#9733;
+        </span>
+      ))}
+    </div>
+  );
+};

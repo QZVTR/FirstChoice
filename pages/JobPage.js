@@ -4,6 +4,8 @@ import { auth, db } from '../firebase'
 import { query, collection, where, getDocs, updateDoc, addDoc, Timestamp } from 'firebase/firestore';
 import { uuid } from 'uuidv4';
 import { useRouter } from 'next/router';
+const Filter = require('bad-words'),
+    filter = new Filter();
 
 export default function JobPage() {
 
@@ -24,6 +26,8 @@ export default function JobPage() {
  
     const [errorMessage, setErrorMessage] = useState("");
 
+    const [badLangue, setBadLanguage] = useState('')
+
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search);
         const email = urlParams.get('s');
@@ -40,6 +44,14 @@ export default function JobPage() {
         )
     }
 
+    const languageChecker = review => {
+        if (filter.isProfane(review)) {
+            return true
+        } else {
+            return false
+        }
+    }
+
     const updateUserDoc = async () => {
         try {
           const jobId = uuid();
@@ -51,11 +63,7 @@ export default function JobPage() {
             const docRef = querySnapshot.docs[0].ref;
             const currentData = querySnapshot.docs[0].data();
             let currentArray = currentData.activeJobPosts || [];
-            console.log('job type ref' + jobTraderTypeRef.current.value)
-            console.log('details ref' + jobDetailsRef.current.value)
-            console.log('timeframe ref' + jobTimeframeRef.current.value)
-            console.log('title ref' + jobTitleRef.current.value)
-            console.log('budget ref' + jobBudgetRef.current.value)
+            
             const newObject = {
               jobId: jobId,
               jobTraderType: jobTraderTypeRef.current.value,
@@ -105,9 +113,14 @@ export default function JobPage() {
         if (!jobDetailsRef.current.value || !jobTitleRef.current.value || jobTraderTypeRef.current.value === 'Choose here' || jobTimeframeRef.current.value === "Choose here" || jobBudgetRef.current.value === 'Choose here' || jobPropertyAuthStatusRef.current.value === "Choose here") {
             setErrorMessage('Please enter all fields')
         } else {
-            updateUserDoc();
-            addJob();
-            router.push('/nav/Jobs')
+            if (languageChecker(jobTitleRef.current.value) && languageChecker(jobDetailsRef.current.value)) {
+                updateUserDoc();
+                addJob();
+                router.push('/nav/Jobs')
+            } else {
+                setBadLanguage('You cannot include bad language in your job post');
+            }
+            
         }
 
     }
@@ -115,6 +128,7 @@ export default function JobPage() {
     return (
         <Layout>
             <h2>Write your job post</h2>
+            {badLangue ? <div>{badLangue}</div> : null}
             <form onSubmit={handleSubmit}>
                 <div>
                 <label htmlFor='jobTitle' >Title your job: </label>

@@ -5,6 +5,8 @@ import { uuid } from 'uuidv4';
 import { query, collection, where, serverTimestamp, getDocs, updateDoc, FieldValue, Timestamp } from 'firebase/firestore';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+const Filter = require('bad-words'),
+    filter = new Filter();
 
 //We will alert the trader via email that they have a new quote request 
 //It will create a current quote section on their page
@@ -28,6 +30,8 @@ export default function QuotePage() {
   const [clientId, setClientId] = useState(null);
   const [tradeId, setTradeId] = useState(null);
 
+  const [badlanguage, setBadLanguage] = useState('');
+
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const clientId = urlParams.get('clientId');
@@ -47,10 +51,23 @@ export default function QuotePage() {
     if (!quoteDetailsRef.current.value || !quoteJobTitleRef.current.value || quoteTimeframeRef.current.value === "Choose here" || quoteBudgetRef.current.value === 'Choose here' || quotePropertyAuthStatusRef.current.value === "Choose here") {
       setQuoteSubmitError('Please enter all fields')
     } else {
-      sendQuote()
-      router.push('/components/SuccessQuotePage')
+      if (languageChecker(quoteJobTitleRef.current.value) && languageChecker(quoteDetailsRef.current.value)) {
+        sendQuote()
+        router.push('/components/SuccessQuotePage')
+      } else {
+        setBadLanguage("You cannot include bad language in you quote request")
+      }
+      
     } 
   }
+
+  const languageChecker = review => {
+    if (filter.isProfane(review)) {
+        return true
+    } else {
+        return false
+    }
+}
 
 
   const sendQuote = async () => {
@@ -91,6 +108,7 @@ export default function QuotePage() {
   return (
     <Layout>
         <div>Quote:</div>
+        {badlanguage ? <div>{badlanguage}</div> : null}
         <form onSubmit={handleSubmit}>
           <div>
           <label htmlFor='jobTitle' >Title your request: </label>

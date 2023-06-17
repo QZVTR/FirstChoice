@@ -92,6 +92,9 @@ export default function SpecificReviews({ id }) {
     const handleSubmit = e => {
         e.preventDefault();
         console.log(makeReview);
+        if (!makeReview && !reviewTitle && !starRating) {
+          alert('You must enter all fields of the review (including rating)')
+        }
         if (!languageChecker(makeReview)) {
             updateUserDoc(id, starRating)
             sendReview(reviewTitle)

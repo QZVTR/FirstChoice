@@ -44,6 +44,7 @@ export default function SignUpCust() {
                 phone:null,
                 companyName: '',
                 bio: '',
+                starRating: [],
             }
         ).then(() => {
             router.push('/')

@@ -1,7 +1,9 @@
 import React from 'react'
-
+import Layout from '../Layout'
 export default function DeleteAccount() {
   return (
-    <div>DeleteAccount</div>
+    <Layout>
+      <div>DeleteAccount</div>
+    </Layout>
   )
 }

@@ -3,6 +3,8 @@ import Layout from '../Layout'
 import { auth, db } from '../../firebase'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
+
 export default function Login() {
     const [signedIn, setSignedIn] = useState(false);
 
@@ -39,6 +41,11 @@ export default function Login() {
                     <input className='passwordLoginMan' name='password' autoFocus type='password' ref={PasswordRef} placeholder='Enter Password'/>
                     <input className='submitLoginMan' type='submit' value='Submit'/>
             </form>
+            <div>
+                <Link href='/ResetPassword'>
+                    Forgot password?
+                </Link>
+            </div>
         </Layout>
     )
 }

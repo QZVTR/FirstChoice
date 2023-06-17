@@ -94,6 +94,9 @@ export default function Profile() {
   return (
     <Layout>
       <h2>Profile</h2>
+      <Link href='/Settings'>
+        <div>Settings</div>
+      </Link>
       <Link href='/components/EditProfile'>
         <img src='/media/EditProfile.jpg' alt='Edit Profile' height='30' width='30'/>
       </Link>

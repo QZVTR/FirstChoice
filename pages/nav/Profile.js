@@ -101,14 +101,14 @@ export default function Profile() {
         <img src='/media/EditProfile.jpg' alt='Edit Profile' height='30' width='30'/>
       </Link>
       {userType === 'Trader' ? <div>
-        <Link href={`/components/UserQuotes/${email}`}>
+        <Link href={`/components/UserQuotes/${encodeURIComponent(email)}`}>
           View your requested quotes
         </Link>
       </div> :
       null
       }
       {userType === 'Customer' ? <div>
-        <Link href={`/components/UserJobPosts/${email}`}>
+        <Link href={`/components/UserJobPosts/${encodeURIComponent(email)}`}>
           View your active job posts
         </Link>
       </div> : null}

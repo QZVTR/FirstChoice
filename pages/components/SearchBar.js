@@ -173,7 +173,7 @@ function SearchButton({ tradeType, jobType }) {
     const searchTradesPeople = (tradeType, jobType) => {
         console.log('Trade type '+tradeType)
         console.log('Job type ' + jobType)
-        router.push(`/jobs/${jobType}`)
+        router.push(`/jobs/${encodeURIComponent(jobType)}`)
     }
 
     return (

@@ -3,6 +3,7 @@ import Layout from '../Layout'
 import { auth, db } from '../../firebase'
 import Link from 'next/link';
 import { query, collection, where, getDocs } from 'firebase/firestore';
+import styles from '../../styles/Jobs.module.css'
 
 export default function Jobs() {
 
@@ -67,7 +68,7 @@ export default function Jobs() {
   return (
     <Layout>
       {userType === 'Customer' ? 
-        <Link href={`/JobPage?s=${user.email}`}>
+        <Link href={`/JobPage?s=${encodeURIComponent(user.email)}`}>
           Create a job post <img alt='Create a job post' src='/media/CreatePost.png' style={{height: 30, width: 30}} />
         </Link>
         :
@@ -76,17 +77,22 @@ export default function Jobs() {
       
       {jobPosts ? <h4>Current Jobs: </h4> : <div>There are no current job posts</div>}
       <div>
+        <div className={styles.grid}>
         {jobPosts?.map((job) => (
-          <div key={job.jobId}>
-            <div>Title: {job.jobTitle}</div>
-            <div>Budget: {job.jobBudget}</div>
-            <div>I am looking for a: {job.jobTraderType}</div>
-            <div>Details of the job: {job.jobDetails}</div>
-            <div>Property authorisation: {job.jobPropertyAuthStatus}</div>
-            <div>Urgency to complete job: {job.jobTimeframe}</div>
-            <div>Please contact me at: {job.jobOwnerEmail}</div>
+          
+            <div className={styles.item}>
+              <Link href={`/specificjobpage/${encodeURIComponent(job.jobId)}?jTi=${encodeURIComponent(job.jobTitle)}&jB=${encodeURIComponent(job.jobBudget)}&jTT=${job.jobTraderType}&jD=${encodeURIComponent(job.jobDetails)}&pAuth=${encodeURIComponent(job.jobPropertyAuthStatus)}&jTF=${encodeURIComponent(job.jobTimeframe)}&jOM=${job.jobOwnerEmail}`}>
+              <div key={job.jobId}>
+                <div className={styles.title}>Title: {job.jobTitle}</div>
+                <div className={styles.subtitle}>Budget: {job.jobBudget}</div>
+                <div className={styles.subtitle}>I am looking for a: {job.jobTraderType}</div>
+                <div className={styles.description}>Details of the job: {job.jobDetails}</div>
+              </div>
+              </Link>
           </div>
+          
         ))}
+        </div>
       </div>
       <br />
 

@@ -12,9 +12,9 @@ import { StarRatingDisplayArr } from '../components/SpecificReviews';
 export default function Type() {
   const [traders, setTraders] = useState([]);
   const router = useRouter();
-  const { type } = router.query;
+  const { type } = (router.query);
   const jobType = type ?  type.replaceAll('%20', ' ') : null;
-
+  
   useEffect(() => {
     const fetchData = async () => {
       console.log('useEffect log '+ typeof(jobType))

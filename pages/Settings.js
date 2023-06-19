@@ -1,7 +1,9 @@
 import React from 'react'
 import Layout from './Layout'
 import Link from 'next/link'
+import { auth } from '../firebase'
 export default function Settings() {
+  const user = auth.currentUser;
   return (
     <Layout>
         <ul>
@@ -21,7 +23,7 @@ export default function Settings() {
                 </Link>
             </li>
             <li>
-                <Link href='/settings/DeleteAccount'>
+                <Link href={`/settings/DeleteAccount?u=${encodeURIComponent(user.email)}`}>
                     <div>Delete account</div>
                 </Link>
             </li>

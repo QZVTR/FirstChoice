@@ -12,7 +12,9 @@ export default function SignUpCust() {
     const passwordRef = useRef(null);
     const password2Ref = useRef(null);
     const router = useRouter();
-    const [signedUp, setSignedUp] = useState();
+    const [signedUp, setSignedUp] = useState(false);
+    const [paymentCompleted, setPaymentCompleted] = useState(false);
+
 
     const signUp = (email, password) => {
         createUserWithEmailAndPassword(auth, email, password)
@@ -59,8 +61,8 @@ export default function SignUpCust() {
     const handleSubmit = e => {
         e.preventDefault();
         if (passwordRef.current.value === password2Ref.current.value) {
+            //router.push('https://buy.stripe.com/test_bIY02jgCy5ut8Ba8wx')
             signUp(emailRef.current.value, passwordRef.current.value)
-            
         }
     }
 

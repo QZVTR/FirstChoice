@@ -51,7 +51,7 @@ export default function QuotePage() {
     if (!quoteDetailsRef.current.value || !quoteJobTitleRef.current.value || quoteTimeframeRef.current.value === "Choose here" || quoteBudgetRef.current.value === 'Choose here' || quotePropertyAuthStatusRef.current.value === "Choose here") {
       setQuoteSubmitError('Please enter all fields')
     } else {
-      if (languageChecker(quoteJobTitleRef.current.value) && languageChecker(quoteDetailsRef.current.value)) {
+      if (!languageChecker(quoteJobTitleRef.current.value) && !languageChecker(quoteDetailsRef.current.value)) {
         sendQuote()
         router.push('/components/SuccessQuotePage')
       } else {

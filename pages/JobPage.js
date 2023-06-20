@@ -113,12 +113,14 @@ export default function JobPage() {
         if (!jobDetailsRef.current.value || !jobTitleRef.current.value || jobTraderTypeRef.current.value === 'Choose here' || jobTimeframeRef.current.value === "Choose here" || jobBudgetRef.current.value === 'Choose here' || jobPropertyAuthStatusRef.current.value === "Choose here") {
             setErrorMessage('Please enter all fields')
         } else {
-            if (languageChecker(jobTitleRef.current.value) && languageChecker(jobDetailsRef.current.value)) {
+            if (!languageChecker(jobTitleRef.current.value) && !languageChecker(jobDetailsRef.current.value)) {
                 updateUserDoc();
                 addJob();
                 router.push('/nav/Jobs')
-            } else {
-                setBadLanguage('You cannot include bad language in your job post');
+            }  else if (languageChecker(jobDetailsRef.current.value)) {
+                setBadLanguage('You cannot include bad language in your job details');
+            } else if (languageChecker(jobTitleRef.current.value)){
+                setBadLanguage('You cannot include bad language in your job post title');
             }
             
         }

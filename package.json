@@ -6,6 +6,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@stripe/stripe-js": "^1.54.1",
     "bad-words": "^3.0.4",
     "firebase": "^9.22.2",
     "next": "latest",

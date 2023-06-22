@@ -17,6 +17,7 @@ export default function Profile() {
   const [bio, setBio] = useState();
   const [jobsAvail, setJobsAvail] = useState([]);
   const [userType, setUserType] = useState();
+  const [imageUrl, setImageUrl] = useState();
   
   function capitalizeWords(str) {
     const words = str.split(' ');
@@ -50,6 +51,7 @@ export default function Profile() {
         setSName(userData.secondName);
         setPhone(userData.phone);
         setEmail(userData.email)
+        setImageUrl(userData.profileImageUrl)
         setUserType('Customer')
       }
     };
@@ -81,6 +83,7 @@ export default function Profile() {
         setBio(userData.bio);
         setEmail(userData.email)
         setJobsAvail(userData.jobsAvail)
+        setImageUrl(userData.profileImageUrl)
         setUserType('Trader')
       }
     };
@@ -116,7 +119,9 @@ export default function Profile() {
       <br />
       <div>
         <div>Name: {fName} {sName}</div>
-        
+        <div>
+          {imageUrl ? <img src={imageUrl} alt='Profile pic' style={{height: 50, width: 50}}/> : null }
+        </div>
         <div>Email: {email}</div>
         <div>Phone number: {phone}</div>
         {companyName ? <div>Company name: {companyName}</div> : null}

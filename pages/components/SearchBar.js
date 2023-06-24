@@ -52,10 +52,10 @@ export function SecondSearch({ trade }) {
                         <select defaultValue='Choose here' name='jobType' onChange={(e) => setJobType(e.target.value)}>
                             <option value='Choose here' disabled hidden>Choose here</option>
                             <option value='access control'>Access Control</option>
-                            <option value='aerial satellite installation'>Aerial and Satelite Dish Installation </option>
+                            <option value='aerial satellite dish installation'>Aerial and Satelite Dish Installation </option>
                             <option value='air conditioning'>Air Conditioning</option>
                             <option value='domestic appliance repair'>Domestic Appliance Repair</option>
-                            <option value='electric oven hob installation'>Electric Oven and Hob Installation</option>
+                            <option value='electric oven and hob installation'>Electric Oven and Hob Installation</option>
                         </select>
                 </div>
                 <SearchButton tradeType={trade} jobType={jobType}/>

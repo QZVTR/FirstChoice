@@ -17,10 +17,10 @@ export default function UserData() {
   const [checkboxes, setCheckboxes] = useState({
     electrician: {
       Access_Control: false,
-      Aerial_Satelite_Dish_Installation: false,
+      Aerial_Satellite_Dish_Installation: false,
       Air_Conditioning: false,
       Domestic_Appliance_Repair: false,
-      Electric_Oven_and_Hob_Installation: false,
+      Electric_Oven_And_Hob_Installation: false,
     },
     plumber: {
       Bathroom_Installation: false,

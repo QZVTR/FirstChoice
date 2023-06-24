@@ -14,6 +14,11 @@ export default function SpecificReviews({ id }) {
     const [makeReview, setMakeReviews] = useState("");
     const [reviewTitle, setReviewTitle] = useState("");
     const [starRating, setStarRating] = useState(null);
+    const [imageURL, setImageURL] = useState(null);
+    const [accountType, setAccountType] = useState(null);
+
+    const user = auth.currentUser;
+    console.log(user.email);
     
     useEffect(() => {
         const fetchReviews = () => {
@@ -31,6 +36,28 @@ export default function SpecificReviews({ id }) {
         }
         fetchReviews();
     },[])
+
+    useEffect(() => {
+      const getUserDataCust = async () => {
+        const q = query(collection(db, 'Customers'), where('email', '==', user.email.toLowerCase()));
+        const querySnapshot = await getDocs(q);
+  
+        if (querySnapshot.empty) {
+          setAccountType('Trader')
+        }
+  
+        if (!querySnapshot.empty) {
+          // Assuming there is only one document matching the email
+          const userData = querySnapshot.docs[0].data();
+          setImageURL(userData.profileImageUrl)
+          setAccountType('Customer')
+        }
+      };
+  
+        if (user) {
+          getUserDataCust();
+        }
+    }, [user])
 
     const updateUserDoc = async (traderId, starRating) => {
       try {
@@ -66,7 +93,8 @@ export default function SpecificReviews({ id }) {
             flagCount: 0,
             flaggedBy: [],
             date_time: serverTimestamp(),
-            starRating: starRating
+            starRating: starRating,
+            profilePic: imageURL
         }
 
         const docRef = await setDoc(doc(db, 'Reviews', reviewId), data);
@@ -92,6 +120,10 @@ export default function SpecificReviews({ id }) {
     const handleSubmit = e => {
         e.preventDefault();
         console.log(makeReview);
+        if (accountType === 'Trader') {
+          alert('You cannot leave a review as a trader on another traders account')
+          return
+        }
         if (!makeReview && !reviewTitle && !starRating) {
           alert('You must enter all fields of the review (including rating)')
         }
@@ -139,7 +171,7 @@ export default function SpecificReviews({ id }) {
               <div key={review.review_id} className={styles.review}>
                 <div className={`${styles.row} ${styles.column}`}>
                   <div className={styles.columnLeft}>
-                    <img className={styles.userLogo} src='/media/user.png' alt='User Logo' />
+                    <img className={styles.userLogo} src={review.profilePic} alt='User Logo' />
                   </div>
                   <div className={styles.columnRight}>
                     <p className={styles.reviewUser}><b>{review.user}</b></p>

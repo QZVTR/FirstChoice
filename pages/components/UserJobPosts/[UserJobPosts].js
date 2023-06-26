@@ -111,10 +111,10 @@ export default function UserJobPosts() {
         ))}
       </div>
       <form onSubmit={handleSubmit}>
-      <input type='submit' value='Remove Selected Quotes' />
+      <input type='submit' value='Remove Selected Jobs' />
       </form> 
       </>
-      : <div>You have no active quotes</div>}
+      : <div>You have no active Job posts</div>}
     </Layout>
   )
 }

@@ -3,6 +3,7 @@ import Layout from '../../Layout';
 import { auth, db } from '../../../firebase';
 import { collection, query, where, getDocs, updateDoc } from 'firebase/firestore';
 import ImageUpload from './ImageUpload'
+import PrevWork from './PrevWork';
 export default function UserData() {
   const [user, setUser] = useState(null);
   const [custUsers, setCustUsers] = useState([]);
@@ -294,6 +295,9 @@ export default function UserData() {
 
         <input type='submit' value='submit' name='submit' />
         </form>
+        <div>
+          <PrevWork email={user.email}/>
+        </div>
       </Layout>
     );
   }

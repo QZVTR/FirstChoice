@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { storage, db } from '../../../firebase';
 import { collection, query, where, getDocs, updateDoc } from 'firebase/firestore';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
-import { cookies } from 'next/dist/client/components/headers';
 
 export default function ImageUpload({ email }) {
   const [file, setFile] = useState(null);

@@ -18,6 +18,7 @@ export default function Profile() {
   const [jobsAvail, setJobsAvail] = useState([]);
   const [userType, setUserType] = useState();
   const [imageUrl, setImageUrl] = useState();
+  const [prevWorkUrl, setPrevWorkUrl] = useState([]);
   
   function capitalizeWords(str) {
     const words = str.split(' ');
@@ -84,6 +85,7 @@ export default function Profile() {
         setEmail(userData.email)
         setJobsAvail(userData.jobsAvail)
         setImageUrl(userData.profileImageUrl)
+        setPrevWorkUrl(userData.prevWorkUrls)
         setUserType('Trader')
       }
     };
@@ -137,6 +139,18 @@ export default function Profile() {
           </div>
           </>
           : null
+        }
+        {userType === 'Trader' ?
+        <>
+        <h4>Images of your previous work:</h4>
+        <div>
+          {prevWorkUrl.map((url, index) => (
+            <img key={index} src={url} alt={`Previous work ${index}`} style={{ height: 100, width: 100 }}/>
+          ))}
+        </div>
+        </>
+        :
+        null
         }
       </div>
     </Layout>

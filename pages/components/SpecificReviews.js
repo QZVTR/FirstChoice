@@ -277,7 +277,7 @@ export const StarRatingDisplayArr = ({ ratings }) => {
           &#9733;
         </span>
       ))}
-      
+      ({ratings.length})
     </div>
   );
 };

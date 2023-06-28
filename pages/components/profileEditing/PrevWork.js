@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { storage, db } from '../../../firebase';
-import { collection, query, where, getDocs, updateDoc } from 'firebase/firestore';
-import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import { collection, query, where, getDocs, updateDoc, getDoc } from 'firebase/firestore';
+import { ref, uploadBytesResumable, getDownloadURL, deleteObject } from 'firebase/storage';
 
 export default function PrevWork({ email }) {
   const [files, setFiles] = useState([]);
@@ -54,7 +54,20 @@ export default function PrevWork({ email }) {
           const userDoc = querySnapshot.docs[0].ref;
           const newData = {
             prevWorkUrls: imageUrls,
-          };
+        };
+
+        // Get the previous URLs from Firestore
+        const prevUrlsSnapshot = await getDoc(userDoc);
+        const prevUrls = prevUrlsSnapshot.data().prevWorkUrls;
+
+        // Delete previous images from storage and remove their URLs from the array
+        const deletePromises = prevUrls.map(async (prevUrl) => {
+          // Delete image from storage
+          const imageRef = ref(storage, prevUrl);
+          await deleteObject(imageRef);
+        });
+
+        await Promise.all(deletePromises);
 
           updateDoc(userDoc, newData)
             .then(() => {

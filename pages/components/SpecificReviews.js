@@ -171,7 +171,7 @@ export default function SpecificReviews({ id }) {
               <div key={review.review_id} className={styles.review}>
                 <div className={`${styles.row} ${styles.column}`}>
                   <div className={styles.columnLeft}>
-                    <img className={styles.userLogo} src={review.profilePic} alt='User Logo' />
+                    {review.profilePic ? <img className={styles.userLogo} src={review.profilePic} alt='User Logo' /> :<img className={styles.userLogo} src='/media/user.png' alt='User Logo' /> }
                   </div>
                   <div className={styles.columnRight}>
                     <p className={styles.reviewUser}><b>{review.user}</b></p>

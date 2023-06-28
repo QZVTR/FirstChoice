@@ -1,10 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar, { NavBarLoggedIn } from './Navbar';
 import { auth } from '../firebase';
 import styles from '../styles/Layout.module.css';
 
 export default function Layout({ children }) {
-  const user = auth.currentUser;
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setUser(user);
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   return (
     <div className={styles.container}>

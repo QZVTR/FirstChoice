@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect} from 'react'
 import Layout from './Layout'
-import { auth, db } from '../firebase'
+import { auth, db, storage } from '../firebase'
 import { query, collection, where, getDocs, updateDoc, addDoc, Timestamp } from 'firebase/firestore';
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { uuid } from 'uuidv4';
 import { useRouter } from 'next/router';
 const Filter = require('bad-words'),
@@ -12,7 +13,7 @@ export default function JobPage() {
     const router = useRouter();
 
     
-
+    const [file, setFile] = useState(null);
     const [email, setEmail] = useState();
 
     const user = auth.currentUser
@@ -26,7 +27,8 @@ export default function JobPage() {
  
     const [errorMessage, setErrorMessage] = useState("");
 
-    const [badLangue, setBadLanguage] = useState('')
+    const [badLanguage, setBadLanguage] = useState('');
+    const [imageUrl, setImageUrl] = useState(null);
 
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search);
@@ -44,6 +46,12 @@ export default function JobPage() {
         )
     }
 
+
+    const handleFileChange = (e) => {
+        const selectedFile = e.target.files[0];
+        setFile(selectedFile);
+      };
+
     const languageChecker = review => {
         if (filter.isProfane(review)) {
             return true
@@ -52,10 +60,10 @@ export default function JobPage() {
         }
     }
 
-    const updateUserDoc = async () => {
+    const updateUserDoc = async (imageUrl) => {
         try {
           const jobId = uuid();
-      
+          console.log(email);
           const q = query(collection(db, 'Customers'), where('email', '==', email));
           const querySnapshot = await getDocs(q);
       
@@ -72,7 +80,8 @@ export default function JobPage() {
               jobTitle: jobTitleRef.current.value,
               jobPropertyAuthStatus: jobPropertyAuthStatusRef.current.value,
               jobBudget: jobBudgetRef.current.value,
-              jobTimestamp: Timestamp.now()
+              jobTimestamp: Timestamp.now(),
+              jobImageUrl: imageUrl
             };
       
             currentArray.push(newObject)
@@ -88,7 +97,7 @@ export default function JobPage() {
         
       
 
-    const addJob = async () => {
+    const addJob = async (imageUrl) => {
         try {
             const jobData = {
                 jobId: uuid(),
@@ -99,6 +108,7 @@ export default function JobPage() {
                 jobTimeframe: jobTimeframeRef.current.value,
                 jobPropertyAuthStatus: jobPropertyAuthStatusRef.current.value,
                 jobBudget: jobBudgetRef.current.value,
+                jobImageUrl: imageUrl
             };
             const docRef = await addDoc(collection(db, 'JobPosts'), jobData);
             console.log('Job added with ID: ', docRef.id);
@@ -108,15 +118,15 @@ export default function JobPage() {
         }
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
         if (!jobDetailsRef.current.value || !jobTitleRef.current.value || jobTraderTypeRef.current.value === 'Choose here' || jobTimeframeRef.current.value === "Choose here" || jobBudgetRef.current.value === 'Choose here' || jobPropertyAuthStatusRef.current.value === "Choose here") {
             setErrorMessage('Please enter all fields')
         } else {
             if (!languageChecker(jobTitleRef.current.value) && !languageChecker(jobDetailsRef.current.value)) {
-                updateUserDoc();
-                addJob();
-                router.push('/nav/Jobs')
+                handleUpload();
+          
+               
             }  else if (languageChecker(jobDetailsRef.current.value)) {
                 setBadLanguage('You cannot include bad language in your job details');
             } else if (languageChecker(jobTitleRef.current.value)){
@@ -126,11 +136,52 @@ export default function JobPage() {
         }
 
     }
+
+
+
+    const handleUpload = () => {
+        if (file) {
+          const fileRef = ref(storage, `JobPosts/${email}/${file.name}`);
+          const uploadTask = uploadBytesResumable(fileRef, file)
+    
+          uploadTask.on('state_changed',
+            (snapshot) => {
+              const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+              console.log('Upload is ' + progress + '% done');
+              switch(snapshot.state) {
+                case 'paused':
+                  console.log('Upload is paused')
+                  break;
+                case 'running':
+                  console.log('Upload is running')
+                  break;
+              }
+            },
+            (error) => {
+              console.error(error)
+            },
+            () => {
+              getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+                if (downloadURL) {
+                  setImageUrl(downloadURL)
+                  updateUserDoc(downloadURL)
+                  addJob(downloadURL)
+                  router.push('/nav/Jobs')
+                }
+              });
+            }
+          );
+        }
+    };
+    
+
+
+
       
     return (
         <Layout>
             <h2>Write your job post</h2>
-            {badLangue ? <div>{badLangue}</div> : null}
+            {badLanguage ? <div>{badLanguage}</div> : null}
             <form onSubmit={handleSubmit}>
                 <div>
                 <label htmlFor='jobTitle' >Title your job: </label>
@@ -190,6 +241,9 @@ export default function JobPage() {
                 </select>
                 </div>
                 <div>
+                    <input type='file' onChange={handleFileChange}/>
+                </div>
+                <div>
                     <input type='submit' value='submit'/>
                 </div>
             </form>
@@ -197,5 +251,5 @@ export default function JobPage() {
                 {errorMessage ? <div>{errorMessage}</div> : null}
             </div>
         </Layout>
-  )
+    )
 }

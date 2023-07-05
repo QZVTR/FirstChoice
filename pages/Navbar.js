@@ -7,6 +7,11 @@ export default function Navbar() {
     <ul className={styles.navbar}>
       <li className={styles.navItem}>
         <Link href='/'>
+          <img src='/media/FirstChoiceLogo2.png' alt='Logo'/>
+        </Link>
+      </li>
+      <li className={styles.navItem}>
+        <Link href='/'>
           <div className={styles.navLink}>Home</div>
         </Link>
       </li>
@@ -33,6 +38,11 @@ export default function Navbar() {
 export function NavBarLoggedIn() {
   return ( 
     <ul className={styles.navbar}>
+      <li className={styles.navItem}>
+        <Link href='/'>
+          <img src='/media/FirstChoiceLogo2.png' alt='Logo' className={styles.navBarLogo}/>
+        </Link>
+      </li>
       <li className={styles.navItem}>
         <Link href='/'>
           <div className={styles.navLink}>Home</div>

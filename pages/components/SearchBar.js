@@ -9,20 +9,23 @@ export default function SearchBar() {
     return (
         <>
             <div className={styles.SearchBar}>
+            <h1 className={styles.searchtextheading}><u>Search First Choice</u></h1>
+                <div className={styles.selectContainer}>
                 <div className={styles.selectWrapper}>
-                    <label htmlFor='TradeType'>What type of trade are you looking for?</label>
-                    <select className={styles.select} defaultValue='Choose here' name='TradeType' onChange={(e) => setTradeType(e.target.value)}>
-                        <option defaultValue='Choose here' disabled hidden>Choose here</option>
-                        <option value='electrician'>Electrician</option>
-                        <option value='plumber'>Plumber</option>
-                        <option value='bathroom fitter'>Bathroom Fitter</option>
-                        <option value='cleaner'>Cleaner</option>
-                        <option value='builder'>Builder</option>
-                        <option value='roofer'>Roofer</option>
-                        <option value='locksmith'>Locksmith</option>
-                    </select>
+                        <label htmlFor='TradeType'>What type of trade are you looking for?</label>
+                        <select className={styles.select} defaultValue='Choose here' name='TradeType' onChange={(e) => setTradeType(e.target.value)}>
+                            <option defaultValue='Choose here' disabled hidden>Choose here</option>
+                            <option value='electrician'>Electrician</option>
+                            <option value='plumber'>Plumber</option>
+                            <option value='bathroom fitter'>Bathroom Fitter</option>
+                            <option value='cleaner'>Cleaner</option>
+                            <option value='builder'>Builder</option>
+                            <option value='roofer'>Roofer</option>
+                            <option value='locksmith'>Locksmith</option>
+                        </select>
+                    </div>
+                    <SecondSearch trade={tradeType} />
                 </div>
-                <SecondSearch trade={tradeType} />
             </div>
         </>
     )
@@ -36,9 +39,11 @@ export function SecondSearch({ trade }) {
             <>
                 <div>
                     <label>What type of job?</label>
+                    <div className={styles.selectWrapper}>
                     <select defaultValue='Choose here'>
                         <option defaultValue='' disabled hidden>Choose here</option>
                     </select>
+                    </div>
                 </div>
                 <SearchButton tradeType={trade} jobType={jobType}/>
             </>
@@ -49,6 +54,7 @@ export function SecondSearch({ trade }) {
             <>
                 <div>
                 <label htmlFor='jobType'>What type of job?</label>
+                        <div className={styles.selectWrapper}>
                         <select defaultValue='Choose here' name='jobType' onChange={(e) => setJobType(e.target.value)}>
                             <option value='Choose here' disabled hidden>Choose here</option>
                             <option value='access control'>Access Control</option>
@@ -57,6 +63,7 @@ export function SecondSearch({ trade }) {
                             <option value='domestic appliance repair'>Domestic Appliance Repair</option>
                             <option value='electric oven and hob installation'>Electric Oven and Hob Installation</option>
                         </select>
+                        </div>
                 </div>
                 <SearchButton tradeType={trade} jobType={jobType}/>
             </>
@@ -66,6 +73,7 @@ export function SecondSearch({ trade }) {
             <>
                 <div>
                 <label htmlFor='jobType'>What type of job?</label>
+                        <div className={styles.selectWrapper}>
                         <select defaultValue='Choose here' name='jobType' onChange={(e) => setJobType(e.target.value)}>
                             <option value='Choose here' disabled hidden>Choose here</option>
                             <option value='bathroom installation'>Bathroom Installation</option>
@@ -74,6 +82,7 @@ export function SecondSearch({ trade }) {
                             <option value='twenty four hour plumber'>Emergency/24 hour plumber</option>
                             <option value='kitchen plumbing'>Kitchen Plubming</option>
                         </select>
+                        </div>
                 </div>
                 <SearchButton tradeType={trade} jobType={jobType}/>
             </>
@@ -83,6 +92,7 @@ export function SecondSearch({ trade }) {
             <>
                 <div>
                 <label htmlFor='jobType'>What type of job?</label>
+                        <div className={styles.selectWrapper}>
                         <select defaultValue='Choose here' name='jobType' onChange={(e) => setJobType(e.target.value)}>
                             <option value='Choose here' disabled hidden>Choose here</option>
                             <option value='bathroom resurfacing'>Bathroom Resurfacing</option>
@@ -91,6 +101,7 @@ export function SecondSearch({ trade }) {
                             <option value='bathroom tiling'>Bathroom Tiling</option>
                             <option value='complete bathroom refurbashing'>Complete Bathroom Refurbashing</option>
                         </select>
+                        </div>
                 </div>
                 <SearchButton tradeType={trade} jobType={jobType}/>
             </>
@@ -100,6 +111,7 @@ export function SecondSearch({ trade }) {
             <>
                 <div>
                 <label htmlFor='jobType'>What type of job?</label>
+                        <div className={styles.selectWrapper}>
                         <select defaultValue='Choose here' name='jobType' onChange={(e) => setJobType(e.target.value)}>
                             <option value='Choose here' disabled hidden>Choose here</option>
                             <option value='carpet cleaning'>Carpet Cleaning</option>
@@ -108,6 +120,7 @@ export function SecondSearch({ trade }) {
                             <option value='domestic deep cleaning'>Domestic Deep Cleaning</option>
                             <option value='domestic house cleaning'>Domestic House Cleaning</option>
                         </select>
+                        </div>
                 </div>
                 <SearchButton tradeType={trade} jobType={jobType}/>
             </>
@@ -117,6 +130,7 @@ export function SecondSearch({ trade }) {
             <>
                 <div>
                 <label htmlFor='jobType'>What type of job?</label>
+                        <div className={styles.selectWrapper}>
                         <select defaultValue='Choose here' name='jobType' onChange={(e) => setJobType(e.target.value)}>
                             <option value='Choose here' disabled hidden>Choose here</option>
                             <option value='cavity wall installation'>Cavity Wall Installation</option>
@@ -125,6 +139,7 @@ export function SecondSearch({ trade }) {
                             <option value='cladding'>Cladding</option>
                             <option value='loft convertion'>Loft Convertion</option>
                         </select>
+                        </div>
                 </div>
                 <SearchButton tradeType={trade} jobType={jobType}/>
             </>
@@ -134,6 +149,7 @@ export function SecondSearch({ trade }) {
             <>
                 <div>
                 <label htmlFor='jobType'>What type of job?</label>
+                        <div className={styles.selectWrapper}>
                         <select defaultValue='Choose here' name='jobType' onChange={(e) => setJobType(e.target.value)}>
                             <option value='Choose here' disabled hidden>Choose here</option>
                             <option value='roof cleaning'>Roof Cleaning</option>
@@ -142,6 +158,7 @@ export function SecondSearch({ trade }) {
                             <option value='leadwork'>Leadwork</option>
                             <option value='zinc metal roof'>Zinc/Metal Roof</option>
                         </select>
+                        </div>
                 </div>
                 <SearchButton tradeType={trade} jobType={jobType}/>
             </>
@@ -151,6 +168,7 @@ export function SecondSearch({ trade }) {
             <>
                 <div>
                 <label htmlFor='jobType'>What type of job?</label>
+                        <div className={styles.selectWrapper}>
                         <select defaultValue='Choose here' name='jobType' onChange={(e) => setJobType(e.target.value)}>
                             <option value='Choose here' disabled hidden>Choose here</option>
                             <option value='burglar repair'>Burglar Repair</option>
@@ -159,6 +177,7 @@ export function SecondSearch({ trade }) {
                             <option value='emergency twenty four hour locksmith'>Emergency 24 hour locksmith</option>
                             <option value='lock fitting repair'>Lock Fitting/Repair</option>
                         </select>
+                        </div>
                 </div>
                 <SearchButton tradeType={trade} jobType={jobType}/>
             </>

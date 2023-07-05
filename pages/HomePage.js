@@ -3,11 +3,13 @@ import SearchBar from './components/SearchBar';
 import HowWeWork from './components/landingPage/HowWeWork';
 import AboutUs from './components/landingPage/AboutUs';
 import SafetyHiring from './components/landingPage/SafetyHiring';
-
+import styles from '../styles/SearchBarBackground.module.css'
 export default function HomePage() {
   return (
     <>
+      <div className={styles.background}>
       <SearchBar />
+      </div>
       <div>
       <h2><u>Welcome to First Choice</u></h2>
       <div>

@@ -80,8 +80,8 @@ export default function Jobs() {
         <div className={styles.grid}>
         {jobPosts?.map((job) => (
           
-            <div className={styles.item}>
-              <Link href={`/specificjobpage/${encodeURIComponent(job.jobId)}?jTi=${encodeURIComponent(job.jobTitle)}&jB=${encodeURIComponent(job.jobBudget)}&jTT=${job.jobTraderType}&jD=${encodeURIComponent(job.jobDetails)}&pAuth=${encodeURIComponent(job.jobPropertyAuthStatus)}&jTF=${encodeURIComponent(job.jobTimeframe)}&jOM=${job.jobOwnerEmail}`}>
+            <div key={job.jobId} className={styles.item}>
+              <Link href={`/specificjobpage/${encodeURIComponent(job.jobId)}?jTi=${encodeURIComponent(job.jobTitle)}&jB=${encodeURIComponent(job.jobBudget)}&jTT=${job.jobTraderType}&jD=${encodeURIComponent(job.jobDetails)}&pAuth=${encodeURIComponent(job.jobPropertyAuthStatus)}&jTF=${encodeURIComponent(job.jobTimeframe)}&jOM=${encodeURIComponent(job.jobOwnerEmail)}`}>
               <div key={job.jobId}>
                 <div className={styles.title}>Title: {job.jobTitle}</div>
                 <div className={styles.subtitle}>Budget: {job.jobBudget}</div>

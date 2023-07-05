@@ -60,9 +60,9 @@ export default function JobPage() {
         }
     }
 
-    const updateUserDoc = async (imageUrl) => {
+    const updateUserDoc = async (imageUrl, uid) => {
         try {
-          const jobId = uuid();
+          const jobId = uid;
           console.log(email);
           const q = query(collection(db, 'Customers'), where('email', '==', email));
           const querySnapshot = await getDocs(q);
@@ -97,10 +97,10 @@ export default function JobPage() {
         
       
 
-    const addJob = async (imageUrl) => {
+    const addJob = async (imageUrl, uid) => {
         try {
             const jobData = {
-                jobId: uuid(),
+                jobId: uid,
                 jobOwnerEmail: email,
                 jobTitle: jobTitleRef.current.value,
                 jobTraderType: jobTraderTypeRef.current.value,
@@ -125,8 +125,6 @@ export default function JobPage() {
         } else {
             if (!languageChecker(jobTitleRef.current.value) && !languageChecker(jobDetailsRef.current.value)) {
                 handleUpload();
-          
-               
             }  else if (languageChecker(jobDetailsRef.current.value)) {
                 setBadLanguage('You cannot include bad language in your job details');
             } else if (languageChecker(jobTitleRef.current.value)){
@@ -163,9 +161,10 @@ export default function JobPage() {
             () => {
               getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
                 if (downloadURL) {
+                  const uid = uuid();
                   setImageUrl(downloadURL)
-                  updateUserDoc(downloadURL)
-                  addJob(downloadURL)
+                  updateUserDoc(downloadURL, uid)
+                  addJob(downloadURL, uid)
                   router.push('/nav/Jobs')
                 }
               });

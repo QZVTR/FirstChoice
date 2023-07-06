@@ -19,6 +19,7 @@ export default function Profile() {
     userType: '',
     imageUrl: '',
     prevWorkUrl: [],
+    workLocation: '',
   });
 
   function capitalizeWords(str) {
@@ -90,6 +91,7 @@ export default function Profile() {
           imageUrl: userData.profileImageUrl,
           prevWorkUrl: userData.prevWorkUrls,
           userType: 'Trader',
+          workLocation: userData.workingLocation
         }));
       }
     };
@@ -136,7 +138,7 @@ export default function Profile() {
         <div>Phone number: {userData.phone}</div>
         {userData.companyName ? <div>Company name: {userData.companyName}</div> : null}
         {userData.bio ? <div>About: {userData.bio}</div> : null}
-
+        {userData.workLocation ? <div>We work in: {userData.workLocation}</div> : null}
         {userData.userType === 'Trader' ? <h4>Services we offer: </h4> : null}
         {userData.jobsAvail ? (
           <>

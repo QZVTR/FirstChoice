@@ -15,6 +15,7 @@ export default function UserData() {
   const [companyName, setCompanyName] = useState('');
   const [tradeType, setTradeType] = useState(null);
   const [jobsAvail, setJobsAvail] = useState('');
+  const [workingLocation, setWorkingLocation] = useState(null);
   const [checkboxes, setCheckboxes] = useState({
     electrician: {
       Access_Control: false,
@@ -147,6 +148,7 @@ export default function UserData() {
             bio: bio || existingData.bio,
             companyName: companyName || existingData.companyName,
             jobsAvail: getCheckedCheckboxes() || existingData.jobsAvail, 
+            workingLocation: workingLocation || existingData.workingLocation
           };
 
           updateDoc(doc.ref, newData)
@@ -237,8 +239,14 @@ export default function UserData() {
     console.log('logged in trade')
     return (
       <Layout>
+        <div>
         <ImageUpload email={user.email}/>
+        </div>
         <div>Tradesmen</div>
+        <div>
+          <div>Upload images of your previous work</div>
+          <PrevWork email={user.email}/>
+        </div>
         <div>Email: {user.email}</div>
         <form onSubmit={handleSubmitTrader}>
           <input placeholder='What is the name of your business: ' onChange={(e) => setCompanyName(e.target.value)} />
@@ -274,7 +282,36 @@ export default function UserData() {
         />
 
         <input placeholder='Tell everyone about your business: ' onChange={(e) => setBio(e.target.value)}/>
-        
+        <div>
+          <label htmlFor='workLocation'>What location do you work in?</label>
+          <select defaultValue='Choose here' name='workLocation' onChange={(e) => setWorkingLocation(e.target.value)}>
+                    <option value='Choose here' disabled hidden>Choose here</option>
+                    <option value='Cardiff'>Cardiff</option>
+                    <option value='Swansea'>Swansea</option>
+                    <option value='Newport'>Newport</option>
+                    <option value='Wrexham'>Wrexham</option>
+                    <option value='Aberystwyth'>Aberystwyth</option>
+                    <option value='Bangor'>Bangor</option>
+                    <option value='London'>London</option>
+                    <option value='Birmingham'>Birmingham</option>
+                    <option value='Manchester'>Manchester</option>
+                    <option value='Edinburgh'>Edinburgh</option>
+                    <option value='Glasgow'>Glasgow</option>
+                    <option value='Belfast'>Belfast</option>
+                    <option value='Liverpool'>Liverpool</option>
+                    <option value='Leeds'>Leeds</option>
+                    <option value='Newcastle'>Newcastle</option>
+                    <option value='Bristol'>Bristol</option>
+                    <option value='Oxford'>Oxford</option>
+                    <option value='Cambridge'>Cambridge</option>
+                    <option value='Nottingham'>Nottingham</option>
+                    <option value='Sheffield'>Sheffield</option>
+                    <option value='Leicester'>Leicester</option>
+                    <option value='York'>York</option>
+                    <option value='Southampton'>Southampton</option>
+                    <option value='Brighton'>Brighton</option>
+                </select>
+        </div>
         {tradeType ? <div>Please tick the services you provide:</div> : null}
         {tradeType && Object.entries(checkboxes[tradeType]).map(([subCategory, checked]) => {
           const name = `${tradeType}.${subCategory}`;
@@ -292,12 +329,10 @@ export default function UserData() {
           );
         })}
 
-
+        
         <input type='submit' value='submit' name='submit' />
         </form>
-        <div>
-          <PrevWork email={user.email}/>
-        </div>
+        
       </Layout>
     );
   }

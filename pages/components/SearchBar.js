@@ -45,7 +45,7 @@ export function SecondSearch({ trade }) {
                     </select>
                     </div>
                 </div>
-                <SearchButton tradeType={trade} jobType={jobType}/>
+                <SearchBarLocation tradeType={trade} jobType={jobType}/>
             </>
         )
     }
@@ -65,7 +65,7 @@ export function SecondSearch({ trade }) {
                         </select>
                         </div>
                 </div>
-                <SearchButton tradeType={trade} jobType={jobType}/>
+                <SearchBarLocation tradeType={trade} jobType={jobType}/>
             </>
         )
     } else if (trade === 'plumber') {
@@ -84,7 +84,7 @@ export function SecondSearch({ trade }) {
                         </select>
                         </div>
                 </div>
-                <SearchButton tradeType={trade} jobType={jobType}/>
+                <SearchBarLocation tradeType={trade} jobType={jobType}/>
             </>
         )
     } else if (trade === 'bathroom fitter') {
@@ -103,7 +103,7 @@ export function SecondSearch({ trade }) {
                         </select>
                         </div>
                 </div>
-                <SearchButton tradeType={trade} jobType={jobType}/>
+                <SearchBarLocation tradeType={trade} jobType={jobType}/>
             </>
         )
     } else if (trade === 'cleaner') {
@@ -122,7 +122,7 @@ export function SecondSearch({ trade }) {
                         </select>
                         </div>
                 </div>
-                <SearchButton tradeType={trade} jobType={jobType}/>
+                <SearchBarLocation tradeType={trade} jobType={jobType}/>
             </>
         )
     } else if (trade === 'builder') {
@@ -141,7 +141,7 @@ export function SecondSearch({ trade }) {
                         </select>
                         </div>
                 </div>
-                <SearchButton tradeType={trade} jobType={jobType}/>
+                <SearchBarLocation tradeType={trade} jobType={jobType}/>
             </>
         )
     } else if (trade === 'roofer') {
@@ -160,7 +160,7 @@ export function SecondSearch({ trade }) {
                         </select>
                         </div>
                 </div>
-                <SearchButton tradeType={trade} jobType={jobType}/>
+                <SearchBarLocation tradeType={trade} jobType={jobType}/>
             </>
         )
     } else if (trade === 'locksmith') {
@@ -179,25 +179,66 @@ export function SecondSearch({ trade }) {
                         </select>
                         </div>
                 </div>
-                <SearchButton tradeType={trade} jobType={jobType}/>
+                <SearchBarLocation tradeType={trade} jobType={jobType}/>
             </>
         )
     }
 }
 
-function SearchButton({ tradeType, jobType }) {
+function SearchBarLocation({ tradeType, jobType }) {
+    const [location, setLocation] = useState(null);
+    return (
+        <>
+            <div>
+                <label htmlFor='jobLocation'>Where are you?</label>
+                <div className={styles.selectWrapper}>
+                <select defaultValue='Choose here' name='jobLocation' onChange={(e) => setLocation(e.target.value)}>
+                    <option value='Choose here' disabled hidden>Choose here</option>
+                    <option value='Cardiff'>Cardiff</option>
+                    <option value='Swansea'>Swansea</option>
+                    <option value='Newport'>Newport</option>
+                    <option value='Wrexham'>Wrexham</option>
+                    <option value='Aberystwyth'>Aberystwyth</option>
+                    <option value='Bangor'>Bangor</option>
+                    <option value='London'>London</option>
+                    <option value='Birmingham'>Birmingham</option>
+                    <option value='Manchester'>Manchester</option>
+                    <option value='Edinburgh'>Edinburgh</option>
+                    <option value='Glasgow'>Glasgow</option>
+                    <option value='Belfast'>Belfast</option>
+                    <option value='Liverpool'>Liverpool</option>
+                    <option value='Leeds'>Leeds</option>
+                    <option value='Newcastle'>Newcastle</option>
+                    <option value='Bristol'>Bristol</option>
+                    <option value='Oxford'>Oxford</option>
+                    <option value='Cambridge'>Cambridge</option>
+                    <option value='Nottingham'>Nottingham</option>
+                    <option value='Sheffield'>Sheffield</option>
+                    <option value='Leicester'>Leicester</option>
+                    <option value='York'>York</option>
+                    <option value='Southampton'>Southampton</option>
+                    <option value='Brighton'>Brighton</option>
+                </select>
+                </div>
+            </div>
+            <SearchButton tradeType={tradeType} jobType={jobType} location={location}/>
+        </>
+    )
+}
+
+function SearchButton({ tradeType, jobType, location }) {
 
     const router = useRouter()
 
-    const searchTradesPeople = (tradeType, jobType) => {
+    const searchTradesPeople = (tradeType, jobType, location) => {
         console.log('Trade type '+tradeType)
         console.log('Job type ' + jobType)
-        router.push(`/jobs/${encodeURIComponent(jobType)}`)
+        router.push(`/jobs/${encodeURIComponent(jobType)}?loc=${encodeURIComponent(location)}`)
     }
 
     return (
         <>
-            {jobType && tradeType ? <button onClick={() => searchTradesPeople(tradeType, jobType)}>Search</button> : <button disabled>Search</button>}
+            {jobType && tradeType && location ? <button onClick={() => searchTradesPeople(tradeType, jobType, location)}>Search</button> : <button disabled>Search</button>}
         </>
     )
     

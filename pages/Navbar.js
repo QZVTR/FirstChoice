@@ -10,6 +10,7 @@ export default function Navbar() {
           <img src='/media/FirstChoiceLogo2.png' alt='Logo'/>
         </Link>
       </li>
+      <div>
       <li className={styles.navItem}>
         <Link href='/'>
           <div className={styles.navLink}>Home</div>
@@ -30,6 +31,7 @@ export default function Navbar() {
           <div className={styles.navLink}>Login</div>
         </Link>
       </li>
+      </div>
     </ul>
   )
 }
@@ -43,6 +45,7 @@ export function NavBarLoggedIn() {
           <img src='/media/FirstChoiceLogo2.png' alt='Logo' className={styles.navBarLogo}/>
         </Link>
       </li>
+      <div className={styles.navbarRightGroup}>
       <li className={styles.navItem}>
         <Link href='/'>
           <div className={styles.navLink}>Home</div>
@@ -63,6 +66,7 @@ export function NavBarLoggedIn() {
           <img src='/media/profile.jpg' alt='Settings' className={styles.profileImage} />
         </Link>
       </li>
+      </div>
     </ul>
   )
 }

@@ -8,11 +8,13 @@ import Link from 'next/link';
 import SearchBar from '../components/SearchBar';
 import { useRouter } from 'next/router';
 import { StarRatingDisplayArr } from '../components/SpecificReviews';
+import stylesBackground from '../../styles/SearchBarBackground.module.css'
+
 
 export default function Type() {
   const [traders, setTraders] = useState([]);
   const router = useRouter();
-  const { type } = (router.query);
+  const { type, loc } = (router.query);
   const jobType = type ?  type.replaceAll('%20', ' ') : null;
   
   useEffect(() => {
@@ -20,7 +22,7 @@ export default function Type() {
       console.log('useEffect log '+ typeof(jobType))
       try {
         const tradersRef = collection(db, 'Traders');
-        const querySnapshot = query(tradersRef, where('jobsAvail', 'array-contains', jobType));
+        const querySnapshot = query(tradersRef, where('jobsAvail', 'array-contains', jobType), where('workingLocation', '==', loc));
         const querySnapshotData = await getDocs(querySnapshot);
         const tradersData = querySnapshotData.docs.map((doc) => doc.data());
 
@@ -45,7 +47,10 @@ export default function Type() {
   if (!traders) {
     return (
       <Layout>
+        <div className={stylesBackground.container}>
+        <img className={stylesBackground.background} src='/media/backgroundphotoforsearch.jpg' alt='background photo' />
         <SearchBar />
+        </div>
         <h2>No traders available</h2>
       </Layout>
     )
@@ -54,8 +59,12 @@ export default function Type() {
 
   return (
     <Layout>
+      <div className={stylesBackground.container}>
+      <img className={stylesBackground.background} src='/media/backgroundphotoforsearch.jpg' alt='background photo' />
       <SearchBar />
+      </div>
       <div>{jobType}</div>
+      <div>{loc}</div>
       <div className={styles.grid}>
       {traders.map((trader) => (
         <div key={trader.id} className={styles.item}>

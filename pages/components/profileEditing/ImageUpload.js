@@ -122,6 +122,7 @@ export default function ImageUpload({ email }) {
     <div>
       <div>{email}</div>
       <div>{userId}</div>
+      <div>Upload a profile picture</div>
       <input type="file" onChange={handleFileChange} />
       <button onClick={handleUpload}>Upload</button>
       {imageUrl && <img src={imageUrl} alt="Uploaded" style={{ height: 40, width: 40}}/>}

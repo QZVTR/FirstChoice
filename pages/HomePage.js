@@ -7,7 +7,8 @@ import styles from '../styles/SearchBarBackground.module.css'
 export default function HomePage() {
   return (
     <>
-      <div className={styles.background}>
+      <div className={styles.container}>
+      <img className={styles.background} src='/media/backgroundphotoforsearch.jpg' alt='background photo' />
       <SearchBar />
       </div>
       <div>

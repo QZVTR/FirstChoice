@@ -1,0 +1,58 @@
+.logoLogin {
+    height: 40px;
+    width: 40px;
+    margin-bottom: 1rem;
+    border-radius: 20px;
+}
+  
+.title {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+  
+.loginContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+  
+.loginCenter {
+    text-align: center;
+    background-color: #f0f2f0;
+    padding-top: 30px;
+    padding-bottom: 50px;
+    padding-left: 50px;
+    padding-right: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 25px;
+    box-shadow: 10px 10px 5px lightblue;
+}
+  
+.emailLoginMan,
+.passwordLoginMan,
+.submitLoginMan {
+    display: block;
+    margin-bottom: 1rem;
+    padding: 10px;
+    border-radius: 25px;
+}
+  
+.emailLoginMan:hover,
+.passwordLoginMan:hover,
+.submitLoginMan:hover {
+    box-shadow: 10px 10px 5px lightblue;
+}
+
+.submitLoginMan {
+    display: block;
+    margin: 0 auto;
+    padding: 10px;
+    border-radius: 25px;
+}
+
+.forgotPass {
+    margin-top: 10px;
+}

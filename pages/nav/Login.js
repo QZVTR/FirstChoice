@@ -4,6 +4,7 @@ import { auth, db } from '../../firebase'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
+import styles from '../../styles/Login.module.css'
 
 export default function Login() {
     const [signedIn, setSignedIn] = useState(false);
@@ -35,16 +36,21 @@ export default function Login() {
 
     return (
         <Layout>
-            <h2>Login</h2>
-            <form onSubmit={handleSubmit}>
-                    <input className='emailLoginMan' name='email' autoFocus ref={emailRef} placeholder='Enter email:'/>
-                    <input className='passwordLoginMan' name='password' autoFocus type='password' ref={PasswordRef} placeholder='Enter Password'/>
-                    <input className='submitLoginMan' type='submit' value='Submit'/>
-            </form>
-            <div>
-                <Link href='/ResetPassword'>
-                    Forgot password?
-                </Link>
+            <div className={styles.loginContainer}>
+                <div className={styles.loginCenter}>
+                <h2 className={styles.title}>Login</h2>
+                <img className={styles.logoLogin} src='/media/FirstChoiceLogo2.png' alt='First Choice Logo' />
+                    <form onSubmit={handleSubmit}>
+                        <input className={styles.emailLoginMan} name='email' autoFocus ref={emailRef} placeholder='Enter email:'/>
+                        <input className={styles.passwordLoginMan} name='password' autoFocus type='password' ref={PasswordRef} placeholder='Enter Password'/>
+                        <input className={styles.submitLoginMan} type='submit' value='Submit'/>
+                    </form>
+                    <div className={styles.forgotPass}>
+                        <Link href='/ResetPassword'>
+                            Forgot password?
+                        </Link>
+                    </div>
+                </div>
             </div>
         </Layout>
     )

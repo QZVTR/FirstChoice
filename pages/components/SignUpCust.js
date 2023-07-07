@@ -5,6 +5,7 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { collection, addDoc, getDocs } from "firebase/firestore";
 import { useRouter } from 'next/router';
 import { v4 as uuidv4 } from 'uuid'
+import styles from '../../styles/Signup.module.css'
 
 export default function SignUpCust() {
     
@@ -12,7 +13,7 @@ export default function SignUpCust() {
     const passwordRef = useRef(null);
     const password2Ref = useRef(null);
     const router = useRouter();
-    const [signedUp, setSignedUp] = useState();
+    //const [signedUp, setSignedUp] = useState();
 
     const signUp = (email, password) => {
         createUserWithEmailAndPassword(auth, email, password)
@@ -64,13 +65,14 @@ export default function SignUpCust() {
 
     return (
         <Layout>
-                <div className='signUpContainer'>
-                <div className='center'>
+            <div className={styles.signUpContainer}>
+                <div className={styles.center}>
+                <img className={styles.logoSignUp} src='/media/FirstChoiceLogo2.png' alt='First Choice Logo' />
                 <form onSubmit={handleSubmit}>
-                    <input className='emailSignUp' name='emailManual' ref={emailRef} autoFocus placeholder='Enter email:'/>
-                    <input className='passwordSignUp' name='password' ref={passwordRef} autoFocus type='password'  placeholder='Enter Password'/>
-                    <input className='password2SignUp' name='password2' ref={password2Ref} autoFocus type='password'  placeholder='Re-enter Password'/>
-                    <input className='signUpSubmit' type='submit' value='Submit'/>
+                    <input className={styles.emailSignUp} name='emailManual' ref={emailRef} autoFocus placeholder='Enter email:'/>
+                    <input className={styles.passwordSignUp} name='password' ref={passwordRef} autoFocus type='password'  placeholder='Enter Password'/>
+                    <input className={styles.password2SignUp} name='password2' ref={password2Ref} autoFocus type='password'  placeholder='Re-enter Password'/>
+                    <input className={styles.signUpSubmit} type='submit' value='Submit'/>
                 </form>
                 </div>
             </div>

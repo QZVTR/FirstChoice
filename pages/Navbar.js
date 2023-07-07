@@ -7,10 +7,10 @@ export default function Navbar() {
     <ul className={styles.navbar}>
       <li className={styles.navItem}>
         <Link href='/'>
-          <img src='/media/FirstChoiceLogo2.png' alt='Logo'/>
+          <img src='/media/FirstChoiceLogo2.png' alt='Logo' className={styles.navBarLogo}/>
         </Link>
       </li>
-      <div>
+      <div className={styles.navbarRightGroup}>
       <li className={styles.navItem}>
         <Link href='/'>
           <div className={styles.navLink}>Home</div>

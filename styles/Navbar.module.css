@@ -15,6 +15,10 @@
 .navItem {
     margin-right: 10px;   
     font: Fraunces;
+
+}
+
+.navItem:hover {
     text-decoration: underline;
 }
   

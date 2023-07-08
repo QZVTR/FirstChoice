@@ -1,0 +1,31 @@
+.container {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: '#f2f2f2';
+    padding: '5px';
+}
+
+.list {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    background-color: #f2f2f2;
+    margin: 0;
+}
+  
+.listItem {
+    margin: 0 10px;
+}
+    
+.listItem:hover {
+    text-decoration: underline;
+}
+  
+.listItem:not(:last-child)::after {
+    content: '|';
+    margin-left: 10px;
+    color: #555555;
+}

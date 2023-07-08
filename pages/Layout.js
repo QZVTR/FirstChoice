@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Navbar, { NavBarLoggedIn } from './Navbar';
 import { auth } from '../firebase';
 import styles from '../styles/Layout.module.css';
+import Footer from './Footer';
 
 export default function Layout({ children }) {
   const [user, setUser] = useState(null);
@@ -20,6 +21,7 @@ export default function Layout({ children }) {
     <div className={styles.container}>
       {user ? <NavBarLoggedIn /> : <Navbar />}
       <div className={styles.content}>{children}</div>
+      <Footer />
     </div>
   );
 }

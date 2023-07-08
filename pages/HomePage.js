@@ -4,6 +4,7 @@ import HowWeWork from './components/landingPage/HowWeWork';
 import AboutUs from './components/landingPage/AboutUs';
 import SafetyHiring from './components/landingPage/SafetyHiring';
 import styles from '../styles/SearchBarBackground.module.css'
+import stylesLanding from '../styles/LandingPage.module.css'
 export default function HomePage() {
   return (
     <>
@@ -11,7 +12,8 @@ export default function HomePage() {
       <img className={styles.background} src='/media/backgroundphotoforsearch.jpg' alt='background photo' />
       <SearchBar />
       </div>
-      <div>
+      <div className={stylesLanding.container}>
+      <div className={stylesLanding.center}>
       <h2><u>Welcome to First Choice</u></h2>
       <div>
       At First Choice we understand the importance of finding reliable and skilled tradespeople for your
@@ -24,12 +26,13 @@ export default function HomePage() {
       Our mission is to simplify the process of finding trustworthy tradespeople while fostering mutually
       beneficial relationships between clients and service providers. We strive to create a platform that
 
-      brings convenience, transparency, and quality to every interaction
-      </div>
+      brings convenience, transparency, and quality to every interaction.
       </div>
       <HowWeWork />
       <AboutUs />
       <SafetyHiring />
+      </div>
+      </div>
     </>
   )
 

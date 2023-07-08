@@ -1,6 +1,6 @@
 .container {
     position: relative;
-    
+    height: 500px;
     object-fit: contain;
 }
   

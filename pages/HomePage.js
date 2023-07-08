@@ -9,17 +9,20 @@ export default function HomePage() {
   return (
     <>
       <div className={styles.container}>
-      <img className={styles.background} src='/media/backgroundphotoforsearch.jpg' alt='background photo' />
-      <SearchBar />
-      </div>
-      <div className={stylesLanding.container}>
       <div className={stylesLanding.center}>
-      <h2><u>Welcome to First Choice</u></h2>
+      <h1><u>Welcome to First Choice</u></h1>
       <div>
       At First Choice we understand the importance of finding reliable and skilled tradespeople for your
       home improvement, maintenance, and repair needs. We are dedicated to connecting clients with
       the right professionals, ensuring a seamless and satisfactory experience for both parties.
       </div>
+      </div>
+      <img className={styles.background} src='/media/backgroundphotosearch.jpg' alt='background photo' />
+      <SearchBar />
+      </div>
+      <div className={stylesLanding.container}>
+      <div className={stylesLanding.center}>
+      
       <div>
       <h3><u>Our Mission:</u></h3>
 

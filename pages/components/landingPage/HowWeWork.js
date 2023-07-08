@@ -1,15 +1,9 @@
-import React from 'react'
-
+import React from 'react';
+import styles from '../../../styles/LandingPage.module.css';
 export default function HowWeWork() {
   return (
     <>
-        <h3><u>How We Help</u></h3>
-        <div>
-          We have developed a user-friendly online platform that allows clients to easily browse and hire
-          tradespeople for a wide range of services. Whether you need a plumber, electrician, carpenter,
-          painter, or any other skilled professional, we have you covered. Our extensive network of qualified
-          tradespeople ensures that you have access to a diverse pool of talent to meet your specific needs.
-        </div>
+      <div className={styles.column}>
         <div>
           <h3><u>For Clients:</u></h3>
           <div>
@@ -29,6 +23,7 @@ export default function HowWeWork() {
             clients, allowing you to focus on what you do best—delivering exceptional service.
           </div>
         </div>
+      </div>
     </>
   )
 }

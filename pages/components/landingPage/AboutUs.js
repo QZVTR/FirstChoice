@@ -1,8 +1,9 @@
 import React from 'react'
-
+import styles from '../../../styles/LandingPage.module.css'
 export default function AboutUs() {
   return (
     <>
+      <div className={styles.column}>
         <h3><u>Our Commitment</u></h3>
         <div>
         At First Choice, we are committed to maintaining the highest standards of quality and
@@ -13,6 +14,7 @@ export default function AboutUs() {
         dedicated customer support team is readily available to answer any questions or address any
         concerns you may have. We value your trust in us and strive to provide exceptional service at every
         step.
+        </div>
         <div>
         Join First Choice today and experience the convenience and peace of mind that comes with finding
         reliable and skilled tradespeople. Whether you’re a client in need of services or a trades person
@@ -21,7 +23,7 @@ export default function AboutUs() {
 
         Thank you for choosing First Choice. We look forward to serving you!
         </div>
-        </div>
+      </div>
     </>
   )
 }

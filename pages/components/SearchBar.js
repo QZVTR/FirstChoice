@@ -187,6 +187,25 @@ export function SecondSearch({ trade }) {
 
 function SearchBarLocation({ tradeType, jobType }) {
     const [location, setLocation] = useState(null);
+
+    if (!tradeType && !jobType) {
+        return (
+            <>
+            <div>
+                <label htmlFor='jobLocation'>Where are you?</label>
+                <div className={styles.selectWrapper}>
+                <select defaultValue='Choose here' name='jobLocation' onChange={(e) => setLocation(e.target.value)}>
+                    <option defaultValue='' disabled hidden>Choose here</option>
+                </select>
+                </div>
+            </div>
+            <div className={styles.containerButton}>
+            <SearchButton tradeType={tradeType} jobType={jobType} location={location}/>
+            </div>
+            </>
+        )
+    }
+
     return (
         <>
             <div>
@@ -221,7 +240,9 @@ function SearchBarLocation({ tradeType, jobType }) {
                 </select>
                 </div>
             </div>
+            <div className={styles.containerButton}>
             <SearchButton tradeType={tradeType} jobType={jobType} location={location}/>
+            </div>
         </>
     )
 }
@@ -238,7 +259,7 @@ function SearchButton({ tradeType, jobType, location }) {
 
     return (
         <>
-            {jobType && tradeType && location ? <button onClick={() => searchTradesPeople(tradeType, jobType, location)}>Search</button> : <button disabled>Search</button>}
+            {jobType && tradeType && location ? <button className={styles.searchButton} onClick={() => searchTradesPeople(tradeType, jobType, location)}>Search</button> : <button className={styles.searchButton} disabled>Search</button>}
         </>
     )
     

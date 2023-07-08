@@ -1,22 +1,33 @@
 .searchBar {
     display: flex;
-    align-items: flex-start;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    flex-wrap: wrap;
     padding: 20px;
     background-color: #f4f4f4;
-  }
+}
+  
+.selectContainer {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
   
 .selectWrapper {
     display: flex;
     flex-direction: column;
-    margin-right: 20px;
 }
   
 .select {
     margin-top: 8px;
     padding: 8px;
     font-size: 16px;
+}
+  
+.containerButton {
+    display: flex;
+    justify-content: center;
 }
   
 .searchButton {
@@ -29,15 +40,9 @@
     border-radius: 4px;
     cursor: pointer;
 }
-
-.selectContainer {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-}
-
+  
 .searchtextheading {
     display: flex;
     justify-content: center;
-    margin-bottom: 50px;
-}
+    margin-bottom: 20px;
+}  

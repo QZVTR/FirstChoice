@@ -33,7 +33,6 @@ export default function HomePage() {
       </div>
       <HowWeWork />
       <AboutUs />
-      <SafetyHiring />
       </div>
     </>
   )

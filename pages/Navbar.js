@@ -63,7 +63,7 @@ export function NavBarLoggedIn() {
       </li>
       <li className={styles.navItem}>
         <Link href='/nav/Profile'>
-          <img src='/media/profile.jpg' alt='Settings' className={styles.profileImage} />
+          <img src='/media/user.svg' alt='Settings' className={styles.profileImage} />
         </Link>
       </li>
       </div>

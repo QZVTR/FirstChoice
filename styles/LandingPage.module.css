@@ -1,38 +1,49 @@
 .container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    border: 1px solid black;
-    background-color: #dde0ec;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  border: 5px solid black; /* Add black border */
+  background-color: #dde0ec;
+  padding: 10px; /* Add padding to container */
+  box-sizing: border-box; /* Include padding in the container's width */
+  height: 100vh;
 }
-  
+
 .column {
-    flex-basis: 100%;
-    margin-bottom: 20px;
-    border-right: 5px solid black;
-    padding-right: 20px;
+  flex-basis: 100%;
+  margin-bottom: 20px;
+  border-right: 5px solid black; /* Add black right border */
+  padding-right: 20px; /* Add spacing between columns */
+  box-sizing: border-box; /* Include padding in the column's width */
 }
-  
-@media (min-width: 768px) {
-    .column {
-      flex-basis: calc(50% - 20px);
-      margin-right: 20px;
-      margin-bottom: 0;
-      padding-right: 20px;
-}
-  
+
 .column:last-child {
-      margin-right: 0;
-      border-right: none;
-      padding-right: 0;
-    }
+  margin-right: 0;
+  border-right: none; /* Remove right border for last column */
+  padding-right: 0; /* Remove spacing for last column */
 }
+
+@media (min-width: 768px) {
+  .column {
+    flex-basis: calc(50% - 40px); /* Adjust the flex-basis value based on the desired spacing */
+    margin-right: 20px;
+    margin-bottom: 0;
+    padding-right: 20px;
+  }
   
+  .column:nth-child(n+1) {
+    margin-right: 0; /* Reset margin-right for odd columns */
+  }
+}
+
 @media (min-width: 1024px) {
-    .column {
-      flex-basis: calc(33.33% - 20px);
-      margin-right: 20px;
-      padding-right: 20px;
-    }
+  .column {
+    flex-basis: calc(33.33% - 40px); /* Adjust the flex-basis value based on the desired spacing */
+    margin-right: 20px;
+    padding-right: 20px;
+  }
+
+  .column:last-child {
+    margin-right: 0; /* Remove margin-right for last column */
+  }
 }
-  

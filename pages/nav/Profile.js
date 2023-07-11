@@ -4,6 +4,7 @@ import Layout from '../Layout';
 import Link from 'next/link';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { v4 as uuidv4 } from 'uuidv4';
+import styles from '../../styles/Profile.module.css';
 
 export default function Profile() {
   const user = auth.currentUser;
@@ -104,61 +105,67 @@ export default function Profile() {
   console.log(userData.jobsAvail);
   return (
     <Layout>
-      <h2>Profile</h2>
-      <Link href="/Settings">
-        <div>Settings</div>
-      </Link>
-      <Link href="/components/EditProfile">
-        <img src="/media/EditProfile.jpg" alt="Edit Profile" height="30" width="30" />
-      </Link>
-      {userData.userType === 'Trader' ? (
-        <div>
-          <Link href={`/components/UserQuotes/${encodeURIComponent(userData.email)}`}>
-            View your requested quotes
-          </Link>
+      <div className={styles.container}>
+        <h2>Profile</h2>
+        <div className={styles.box}>
+        
+        <Link href="/Settings">
+          <img src='/media/settings.svg' alt='settings' height="30" width="30" />
+        </Link>
+        <Link href="/components/EditProfile">
+          <img src="/media/EditProfile.jpg" alt="Edit Profile" height="30" width="30" />
+        </Link>
+        {userData.userType === 'Trader' ? (
+          <div>
+            <Link href={`/components/UserQuotes/${encodeURIComponent(userData.email)}`}>
+              View your requested quotes
+            </Link>
+          </div>
+        ) : null}
+        {userData.userType === 'Customer' ? (
+          <div>
+            <Link href={`/components/UserJobPosts/${encodeURIComponent(userData.email)}`}>
+              View your active job posts
+            </Link>
+          </div>
+        ) : null}
         </div>
-      ) : null}
-      {userData.userType === 'Customer' ? (
+        
+        
+        <br />
         <div>
-          <Link href={`/components/UserJobPosts/${encodeURIComponent(userData.email)}`}>
-            View your active job posts
-          </Link>
-        </div>
-      ) : null}
-
-      <br />
-      <div>
-        <div>Name: {userData.fName} {userData.sName}</div>
-        <div>
-          {userData.imageUrl ? (
-            <img src={userData.imageUrl} alt="Profile pic" style={{ height: 50, width: 50 }} />
+          <div>Name: {userData.fName} {userData.sName}</div>
+          <div>
+            {userData.imageUrl ? (
+              <img src={userData.imageUrl} alt="Profile pic" style={{ height: 50, width: 50 }} />
+            ) : null}
+          </div>
+          <div>Email: {userData.email}</div>
+          <div>Phone number: {userData.phone}</div>
+          {userData.companyName ? <div>Company name: {userData.companyName}</div> : null}
+          {userData.bio ? <div>About: {userData.bio}</div> : null}
+          {userData.workLocation ? <div>We work in: {userData.workLocation}</div> : null}
+          {userData.userType === 'Trader' ? <h4>Services we offer: </h4> : null}
+          {userData.jobsAvail ? (
+            <>
+              <div>
+                {userData.jobsAvail.map((job, index) => (
+                  <div key={index}>{capitalizeWords(job)}</div>
+                ))}
+              </div>
+            </>
+          ) : null}
+          {userData.userType === 'Trader' ? (
+            <>
+              <h4>Images of your previous work:</h4>
+              <div>
+                {userData.prevWorkUrl.map((url, index) => (
+                  <img key={index} src={url} alt={`Previous work ${index}`} style={{ height: 100, width: 100 }} />
+                ))}
+              </div>
+            </>
           ) : null}
         </div>
-        <div>Email: {userData.email}</div>
-        <div>Phone number: {userData.phone}</div>
-        {userData.companyName ? <div>Company name: {userData.companyName}</div> : null}
-        {userData.bio ? <div>About: {userData.bio}</div> : null}
-        {userData.workLocation ? <div>We work in: {userData.workLocation}</div> : null}
-        {userData.userType === 'Trader' ? <h4>Services we offer: </h4> : null}
-        {userData.jobsAvail ? (
-          <>
-            <div>
-              {userData.jobsAvail.map((job, index) => (
-                <div key={index}>{capitalizeWords(job)}</div>
-              ))}
-            </div>
-          </>
-        ) : null}
-        {userData.userType === 'Trader' ? (
-          <>
-            <h4>Images of your previous work:</h4>
-            <div>
-              {userData.prevWorkUrl.map((url, index) => (
-                <img key={index} src={url} alt={`Previous work ${index}`} style={{ height: 100, width: 100 }} />
-              ))}
-            </div>
-          </>
-        ) : null}
       </div>
     </Layout>
   );

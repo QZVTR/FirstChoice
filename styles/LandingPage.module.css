@@ -1,27 +1,22 @@
 .container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  border: 5px solid black; /* Add black border */
+  justify-content: space-evenly;
   background-color: #dde0ec;
-  padding: 10px; /* Add padding to container */
   box-sizing: border-box; /* Include padding in the container's width */
-  height: 100vh;
+  height: 500px;
+  padding-top: 20px;
 }
 
 .column {
-  flex-basis: 100%;
-  margin-bottom: 20px;
-  border-right: 5px solid black; /* Add black right border */
-  padding-right: 20px; /* Add spacing between columns */
+  flex-direction: column;
+  border: 5px solid black; /* Add black right border */
+  /* Add spacing between columns */
   box-sizing: border-box; /* Include padding in the column's width */
+  align-content: center;
 }
 
-.column:last-child {
-  margin-right: 0;
-  border-right: none; /* Remove right border for last column */
-  padding-right: 0; /* Remove spacing for last column */
-}
+
 
 @media (min-width: 768px) {
   .column {

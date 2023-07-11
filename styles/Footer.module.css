@@ -3,10 +3,10 @@
     left: 0;
     bottom: 0;
     width: 100%;
-    background-color: '#f2f2f2';
-    padding-top: 50px;
+    background-color: #f2f2f2;
+        z-index: 9999; /* Ensure the footer appears above other elements */
 }
-
+  
 .list {
     list-style: none;
     display: flex;
@@ -19,7 +19,7 @@
 .listItem {
     margin: 0 10px;
 }
-    
+  
 .listItem:hover {
     text-decoration: underline;
 }
@@ -29,3 +29,12 @@
     margin-left: 10px;
     color: #555555;
 }
+  
+  /* Add media queries to adjust the footer for smaller screens */
+@media (max-width: 768px) {
+    .container {
+      position: relative; /* Change position to relative for smaller screens */
+      padding-bottom: 20px; /* Add some bottom padding to create space */
+    }
+}
+  

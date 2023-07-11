@@ -4,7 +4,8 @@ body {
   margin: 0px;
   font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
     Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-
+  background-color: #dde0ec;
+  min-height: 100%;
 }
 
 a {
@@ -55,4 +56,20 @@ align-content is used to space rows along the cross axis.
 flex-direction is used to specify the main and cross axes.
 flex-flow is used to specify flex-wrap and flex-direction in one declaration.
 Flex containers can be nested inside of each other by declaring display: flex or display: inline-flex for children of flex containers.
+*/
+
+/*
+Review: Grid Advanced
+
+grid-template-areas specifies grid named grid areas
+grid layouts are two-dimensional: they have a row, or inline, axis and a column, or block, axis.
+justify-items specifies how individual elements should spread across the row axis
+justify-content specifies how groups of elements should spread across the row axis
+justify-self specifies how a single element should position itself with respect to the row axis
+align-items specifies how individual elements should spread across the column axis
+align-content specifies how groups of elements should spread across the column axis
+align-self specifies how a single element should position itself with respect to the column axis
+grid-auto-rows specifies the height of rows added implicitly to the grid
+grid-auto-columns specifies the width of columns added implicitly to the grid
+grid-auto-flow specifies in which direction implicit elements should be created
 */

@@ -107,7 +107,7 @@ export default function Profile() {
     <Layout>
       <div className={styles.container}>
         <h2>Profile</h2>
-        <div className={styles.box}>
+        <div className={styles.boxSets}>
         
         <Link href="/Settings">
           <img src='/media/settings.svg' alt='settings' height="30" width="30" />
@@ -133,9 +133,9 @@ export default function Profile() {
         
         
         <br />
-        <div>
+          <div className={styles.boxUserInfo}>
           <div>Name: {userData.fName} {userData.sName}</div>
-          <div>
+          <div >
             {userData.imageUrl ? (
               <img src={userData.imageUrl} alt="Profile pic" style={{ height: 50, width: 50 }} />
             ) : null}
@@ -145,6 +145,8 @@ export default function Profile() {
           {userData.companyName ? <div>Company name: {userData.companyName}</div> : null}
           {userData.bio ? <div>About: {userData.bio}</div> : null}
           {userData.workLocation ? <div>We work in: {userData.workLocation}</div> : null}
+          </div>
+          <div className={styles.boxTraderServices}>
           {userData.userType === 'Trader' ? <h4>Services we offer: </h4> : null}
           {userData.jobsAvail ? (
             <>
@@ -155,6 +157,8 @@ export default function Profile() {
               </div>
             </>
           ) : null}
+          </div>
+          <div className={styles.boxPrevwork}>
           {userData.userType === 'Trader' ? (
             <>
               <h4>Images of your previous work:</h4>
@@ -165,7 +169,7 @@ export default function Profile() {
               </div>
             </>
           ) : null}
-        </div>
+          </div>
       </div>
     </Layout>
   );

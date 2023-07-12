@@ -4,7 +4,7 @@
     bottom: 0;
     width: 100%;
     background-color: #f2f2f2;
-        z-index: 9999; /* Ensure the footer appears above other elements */
+    z-index: 9999; /* Ensure the footer appears above other elements */
 }
   
 .list {
@@ -34,7 +34,6 @@
 @media (max-width: 768px) {
     .container {
       position: relative; /* Change position to relative for smaller screens */
-      padding-bottom: 20px; /* Add some bottom padding to create space */
     }
 }
   

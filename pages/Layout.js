@@ -20,7 +20,9 @@ export default function Layout({ children }) {
   return (
     <div className={styles.container}>
       {user ? <NavBarLoggedIn /> : <Navbar />}
+      <main>
       <div className={styles.content}>{children}</div> 
+      </main>
       <footer>
       <Footer />
       </footer>

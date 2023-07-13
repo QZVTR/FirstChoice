@@ -164,8 +164,10 @@ export default function SpecificReviews({ id }) {
   
 
     return (
+      <div>
+        <h4><u>Reviews:</u></h4>
+        <div className={styles.container}>
         <div className={styles.reviewBox}>
-          <p className={styles.reviewTitle}><b><u>User Reviews</u></b></p>
           <div>
             {reviews?.map((review) => (
               <div key={review.review_id} className={styles.review}>
@@ -175,7 +177,7 @@ export default function SpecificReviews({ id }) {
                   </div>
                   <div className={styles.columnRight}>
                     <p className={styles.reviewUser}><b>{review.user}</b></p>
-                    <p>Review Title: {review.titleDisplay}</p>
+                    <p className={styles.reviewTitle}>Review Title: {review.titleDisplay}</p>
                     <p className={styles.reviewData}>Review: {review.review}</p>
                     <StarRatingDisplay rating={review.starRating}/>
                     <img
@@ -191,6 +193,7 @@ export default function SpecificReviews({ id }) {
           </div>
           <div className={styles.newReview}>
             <form onSubmit={handleSubmit}>
+              <div className={styles.reviewContainer}>
               <input
                 name='reviewTitle'
                 autoFocus
@@ -199,18 +202,21 @@ export default function SpecificReviews({ id }) {
                 placeholder='Enter Review Title'
                 className={styles.newTitle}
               />
-              <input
+              <textarea
                 name='makeReview'
                 autoFocus
                 value={makeReview}
                 onChange={handleChange}
                 placeholder='Enter Review'
                 className={styles.newData}
-              />
+              ></textarea>
+              </div>
               <StarRating rating={starRating} onStarClick={handleStarClick}/>
               <input type='submit' value='Submit' className={styles.submit} />
             </form>
           </div>
+        </div>
+        </div>
         </div>
       );
 }

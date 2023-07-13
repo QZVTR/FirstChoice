@@ -63,10 +63,16 @@ export default function User() {
         return capitalizedWords.join(' ');
     }
 
+    if (!userData) {
+        return (
+            <Layout>
+                <h1>Account not available</h1>
+            </Layout>
+        )
+    }
 
     return (
         <Layout>
-            <div>User ID: {id}</div>
             {userData && (
                 <>
                 <div>
@@ -86,6 +92,14 @@ export default function User() {
                     : null
                 }
                 </div>
+                </div>
+                <div>
+                    <h4><u>Previous Work</u></h4>
+                    {userData.prevWorkUrls?.map((image, index) => (
+                        <div key={index}>
+                            <img src={image} alt='Previous work image' style={{ height: 300, width: 300}}/>
+                        </div>
+                    ))}
                 </div>
 
                 {auth.currentUser && custUsers.includes(auth.currentUser.email.toLowerCase()) ? <div>

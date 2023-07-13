@@ -7,8 +7,18 @@ import { v4 as uuidv4 } from 'uuidv4';
 import styles from '../../styles/Profile.module.css';
 
 export default function Profile() {
-  const user = auth.currentUser;
-  console.log(user);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setUser(user);
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+  
   const [userData, setUserData] = useState({
     fName: '',
     sName: '',

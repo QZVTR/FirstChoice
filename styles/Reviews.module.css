@@ -1,7 +1,13 @@
+.container {
+    display: flex;
+}
+
 .reviewBox {
     margin-bottom: 20px;
+    width: 100%;
     border: 1px solid #ddd;
     padding: 20px;
+    border: 1px solid black;
 }
   
 .reviewTitle {
@@ -46,6 +52,7 @@
   
 .reviewData {
     margin-bottom: 10px;
+
 }
   
 .flagReview {
@@ -58,14 +65,27 @@
 .newReview {
     margin-top: 20px;
 }
+
+.reviewContainer {
+    display: flex;
+    flex-direction: column;
+}
   
 .newTitle,
 .newData {
-    width: 100%;
+    width: 25%;
     margin-bottom: 10px;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
+    margin-left: 60px;
+    border: 1px solid black;
+
+}
+
+.newData {
+    height: 100px;
+    font-family: Helvetica, sans-serif;
 }
   
 .submit {

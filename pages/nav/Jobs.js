@@ -11,6 +11,15 @@ export default function Jobs() {
   const [userType, setUserType] = useState(null);
   const [userDataArr, setUserDataArr] = useState([]);
   const [jobPosts, setJobPosts] = useState([]);
+
+  const getFirstSentence = (desc) => {
+    const firstPeriodIndex = desc.indexOf('.');
+    if (firstPeriodIndex !== -1) {
+      return desc.slice(0, firstPeriodIndex + 1).trim() + "..";
+    }
+    return desc;
+  }
+
   
 
   useEffect(() => {
@@ -86,7 +95,7 @@ export default function Jobs() {
                 <div className={styles.title}>Title: {job.jobTitle}</div>
                 <div className={styles.subtitle}>Budget: {job.jobBudget}</div>
                 <div className={styles.subtitle}>I am looking for a: {job.jobTraderType}</div>
-                <div className={styles.description}>Details of the job: {job.jobDetails}</div>
+                <div className={styles.description}>Details of the job: {getFirstSentence(job.jobDetails)}</div>
               </div>
               </Link>
           </div>

@@ -81,7 +81,7 @@ export default function JobPage() {
               jobPropertyAuthStatus: jobPropertyAuthStatusRef.current.value,
               jobBudget: jobBudgetRef.current.value,
               jobTimestamp: Timestamp.now(),
-              jobImageUrl: imageUrl
+              jobImageUrl: imageUrl 
             };
       
             currentArray.push(newObject)
@@ -108,7 +108,7 @@ export default function JobPage() {
                 jobTimeframe: jobTimeframeRef.current.value,
                 jobPropertyAuthStatus: jobPropertyAuthStatusRef.current.value,
                 jobBudget: jobBudgetRef.current.value,
-                jobImageUrl: imageUrl
+                jobImageUrl: imageUrl 
             };
             const docRef = await addDoc(collection(db, 'JobPosts'), jobData);
             console.log('Job added with ID: ', docRef.id);
@@ -138,6 +138,12 @@ export default function JobPage() {
 
 
     const handleUpload = () => {
+        if (!file) {
+            const uid = uuid();
+            updateUserDoc("", uid)
+            addJob("", uid)
+            router.push('/nav/Jobs')
+        }
         if (file) {
           const fileRef = ref(storage, `JobPosts/${email}/${file.name}`);
           const uploadTask = uploadBytesResumable(fileRef, file)
@@ -202,7 +208,7 @@ export default function JobPage() {
                 </div>
                 <div>
                 <label htmlFor='jobDescription' >Tell us about the job you need doing? </label>
-                <input ref={jobDetailsRef} name='jobDescription' placeholder='Enter here:' />
+                <textarea ref={jobDetailsRef} name='jobDescription' placeholder='Enter here:' ></textarea>
                 </div>
                 <div>
                 <label htmlFor='jobTimeFrame'>When do you need the job done? </label>

@@ -6,9 +6,9 @@
 }
   
 .item {
-    width: calc(33.33% - 1rem);
     background-color: #fff;
     border: 1px solid #ddd;
+    min-width: 400px;
     padding: 1rem;
     margin-bottom: 1rem;
     margin-right: 0.5rem;

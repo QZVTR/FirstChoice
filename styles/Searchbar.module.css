@@ -24,6 +24,7 @@
 .selectWrapper {
     display: flex;
     flex-direction: column;
+    
 }
   
 .selectLabel {
@@ -37,6 +38,7 @@
     padding: 8px;
     font-size: 10px;
     width: 280px;
+    height: 30px;
     border-radius: 10px;
     color: black;
     background-color: #D7F0FF;

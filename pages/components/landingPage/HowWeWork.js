@@ -20,7 +20,7 @@ export default function HowWeWork() {
             We also prioritize the success of our tradespeople. By joining our platform, you gain exposure to a
             wide client base actively seeking your expertise. We provide you with a platform to showcase your
             skills, qualifications, and achievements. Our aim is to help you expand your business and reach new
-            clients, allowing you to focus on what you do best—delivering exceptional service.
+            clients, allowing you to focus on what you do best delivering exceptional service.
           </div>
         </div>
       </div>

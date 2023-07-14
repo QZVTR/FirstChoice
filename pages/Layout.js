@@ -23,9 +23,7 @@ export default function Layout({ children }) {
       <main>
       <div className={styles.content}>{children}</div> 
       </main>
-      <footer>
       <Footer />
-      </footer>
     </div>
   );
 }

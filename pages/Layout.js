@@ -19,6 +19,9 @@ export default function Layout({ children }) {
 
   return (
     <div className={styles.container}>
+      <head>
+        <title>First Choice Pro</title>
+      </head>
       {user ? <NavBarLoggedIn /> : <Navbar />}
       <main>
       <div className={styles.content}>{children}</div> 

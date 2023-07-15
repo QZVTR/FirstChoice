@@ -121,20 +121,22 @@ export default function SpecificReviews({ id }) {
         e.preventDefault();
         console.log(makeReview);
         if (accountType === 'Trader') {
-          alert('You cannot leave a review as a trader on another traders account')
+          alert('You cannot leave a review as a trader on another traders profile')
           return
         }
-        if (!makeReview && !reviewTitle && !starRating) {
+        if (!makeReview || !reviewTitle || !starRating) {
           alert('You must enter all fields of the review (including rating)')
+          return 
         }
-        if (!languageChecker(makeReview)) {
+        if (!languageChecker(makeReview) && !languageChecker(reviewTitle)) {
             updateUserDoc(id, starRating)
             sendReview(reviewTitle)
             setMakeReviews("");
             setReviewTitle("");
             setStarRating(null);
-        }else {
+        }else if (languageChecker(makeReview) || languageChecker(reviewTitle)){
             alert('Review contains bad language');
+            return 
         }
     }
 

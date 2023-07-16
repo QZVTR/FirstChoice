@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { v4 as uuidv4 } from 'uuidv4';
 import styles from '../../styles/Profile.module.css';
+import SEO from '../components/seo';
 
 export default function Profile() {
   const [user, setUser] = useState(null);
@@ -115,6 +116,7 @@ export default function Profile() {
   console.log(userData.jobsAvail);
   return (
     <Layout>
+      <SEO pageTitle={`First Choice Pro ${user.email.toLowerCase()}`}/>
       <div className={styles.container}>
         <h2>Profile</h2>
         <div className={styles.boxSets}>

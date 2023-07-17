@@ -67,6 +67,7 @@ export default function SignUpCust() {
         <Layout>
             <div className={styles.signUpContainer}>
                 <div className={styles.center}>
+                <h1>Customer sign up</h1>
                 <img className={styles.logoSignUp} src='/media/FirstChoiceLogo2.png' alt='First Choice Logo' />
                 <form onSubmit={handleSubmit}>
                     <input className={styles.emailSignUp} name='emailManual' ref={emailRef} autoFocus placeholder='Enter email:'/>

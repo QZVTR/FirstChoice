@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { db } from '../../firebase';
 import { getDocs, where, collection, query } from 'firebase/firestore';
 import styles from '../../styles/SpecificJobPage.module.css'
+import Image from 'next/image';
 
 export default function SpecificJob() {
   const [jIUl, setjIUL] = useState(null);

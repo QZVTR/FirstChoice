@@ -48,7 +48,7 @@ export default function Type() {
     return (
       <Layout>
         <div className={stylesBackground.container}>
-        <img className={stylesBackground.background} src='/media/backgroundphotoforsearch.jpg' alt='background photo' />
+        <img className={stylesBackground.background} src='/media/backgroundphotosearch.jpg' alt='background photo' />
         <SearchBar />
         </div>
         <h2>No traders available</h2>
@@ -60,7 +60,7 @@ export default function Type() {
   return (
     <Layout>
       <div className={stylesBackground.container}>
-      <img className={stylesBackground.background} src='/media/backgroundphotoforsearch.jpg' alt='background photo' />
+      <img className={stylesBackground.background} src='/media/backgroundphotosearch.jpg' alt='background photo' />
       <SearchBar />
       </div>
       <div>{jobType}</div>

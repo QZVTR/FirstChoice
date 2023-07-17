@@ -3,6 +3,7 @@ import { signOut } from 'firebase/auth'
 import { auth } from '../../firebase'
 import Layout from '../Layout'
 import { useRouter } from 'next/router'
+import styles from '../../styles/Logout.module.css'
 
 export default function Logout() {
     
@@ -18,13 +19,12 @@ export default function Logout() {
 
     return (
         <Layout>
-            <div>
+            <div className={styles.container}>
+                <div className={styles.wrapper}>
                 <h1>Sign out</h1>
                 <p><i>Click the button below to sign out of the system</i></p>
-                <br />
-                <br />
-                <br />
                 <button className='signOut' onClick={SignOut}>Sign out</button>
+                </div>
             </div>
         </Layout>
     )

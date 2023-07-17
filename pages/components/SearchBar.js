@@ -220,7 +220,7 @@ function SearchBarLocation({ tradeType, jobType }) {
                     <option value='Swansea'>Swansea</option>
                     <option value='Newport'>Newport</option>
                     <option value='Wrexham'>Wrexham</option>
-                    <option value='Aberdon'>London</option>
+                    <option value='London'>London</option>
                     <option value='Birystwyth'>Aberystwyth</option>
                     <option value='Bangor'>Bangor</option>
                     <option value='Birmingham'>Birmingham</option>

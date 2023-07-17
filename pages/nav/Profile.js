@@ -116,7 +116,7 @@ export default function Profile() {
   console.log(userData.jobsAvail);
   return (
     <Layout>
-      <SEO pageTitle={`First Choice Pro ${user.email.toLowerCase()}`}/>
+      <SEO pageTitle={`First Choice Profile - ${userData.fName}`}/>
       <div className={styles.container}>
         <h2>Profile</h2>
         <div className={styles.boxSets}>

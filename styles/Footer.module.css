@@ -30,7 +30,6 @@
   /* Add media queries to adjust the footer for smaller screens */
 @media (max-width: 768px) {
     .container {
-      position: relative; /* Change position to relative for smaller screens */
+      margin-top: auto; /* Change position to relative for smaller screens */
     }
 }
-  

@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import SignUpCust from '../components/SignUpCust'
-import SignUpTrader from '../components/SignUpTrader'
 import { useRouter } from 'next/router'
 import Layout from '../Layout'
+import styles from '../../styles/SignUpChoice.module.css'
+
 export default function SignUp() {
     const [signUpOption, setSignUpOption] = useState();
     const router = useRouter();
@@ -16,11 +16,16 @@ export default function SignUp() {
 
     return (
         <Layout>
-            <h3>Are you a trader or a customer?</h3>
-            <form onSubmit={handleSubmit}>
-                <button value='Trader' onClick={e => setSignUpOption(e.target.value)}>Tradesmen</button>
-                <button value='Cust' onClick={e => setSignUpOption(e.target.value)}>Customer</button>
-            </form>
+            <div className={styles.container}>
+                <div className={styles.wrapper}>            
+                    <h3>Are you a trades person or a customer?</h3>
+                    <form onSubmit={handleSubmit}>
+                        <button value='Trader' onClick={e => setSignUpOption(e.target.value)} className={styles.TradButton}>Tradesmen</button>
+                        <button value='Cust' onClick={e => setSignUpOption(e.target.value)} className={styles.CustButton}>Customer</button>
+                    </form>
+                </div>
+            </div>
+
         </Layout>
     )
 }

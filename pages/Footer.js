@@ -13,7 +13,7 @@ export default function Footer() {
         </li>
         <li className={styles.listItem}>
             <Link href='/settings/ContactUs'>
-                ContactUs.js
+                Contact Us
             </Link>
         </li>
         <li className={styles.listItem}> 

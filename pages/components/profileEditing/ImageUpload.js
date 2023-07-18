@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { storage, db } from '../../../firebase';
 import { collection, query, where, getDocs, updateDoc } from 'firebase/firestore';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import Compressor from 'compressorjs';
 
 export default function ImageUpload({ email }) {
   const [file, setFile] = useState(null);
@@ -24,7 +25,7 @@ export default function ImageUpload({ email }) {
                 const userDoc = querySnapshot.docs[0];
                 console.log(userDoc)
                 setUserId(userDoc.data().id);
-                setTraderLogged(True)
+                setTraderLogged(true)
             }
         } catch (error) {
             console.error(error);
@@ -44,7 +45,7 @@ export default function ImageUpload({ email }) {
                 const userDoc = querySnapshot.docs[0];
                 console.log(userDoc)
                 setUserId(userDoc.data().id);
-                setTraderLogged(True)
+                setTraderLogged(false)
             }
         } catch (error) {
             console.error(error);
@@ -53,10 +54,21 @@ export default function ImageUpload({ email }) {
       getUserData();
   },[email])
 
+  const compress = file => {
+    new Compressor(file, {
+      quality: 0.6,
+
+      success(result) {
+        setFile(result)
+      }
+    })
+  }
+
   
   const handleUpload = () => {
     if (file) {
       const fileRef = ref(storage, `profileImages/${userId}/${file.name}`);
+      compress(file)
       const uploadTask = uploadBytesResumable(fileRef, file)
 
       uploadTask.on('state_changed',

@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { storage, db } from '../../../firebase';
 import { collection, query, where, getDocs, updateDoc, getDoc } from 'firebase/firestore';
 import { ref, uploadBytesResumable, getDownloadURL, deleteObject } from 'firebase/storage';
+import Compressor from 'compressorjs';
 
 export default function PrevWork({ email }) {
   const [files, setFiles] = useState([]);
+  const [fileUp, setFileUp] = useState(null);
   const [imageUrls, setImageUrls] = useState([]);
   const [userId, setUserId] = useState(null);
   const [traderLogged, setTraderLogged] = useState(false);
@@ -104,12 +106,23 @@ export default function PrevWork({ email }) {
     }
   }, [imageUrls, traderLogged, userId]);
 
+  const compress = file => {
+    new Compressor(file, {
+      quality: 0.6,  
+      success(result) {
+        setFileUp(result)
+      }
+    })
+  }
+
+
   const handleUpload = async () => {
     try {
       const uploadPromises = files.map((file) => {
         return new Promise((resolve, reject) => {
           const fileRef = ref(storage, `previousWork/${userId}/${file.name}`);
-          const uploadTask = uploadBytesResumable(fileRef, file);
+          setFileUp(compress(file))
+          const uploadTask = uploadBytesResumable(fileRef, fileUp);
 
           uploadTask.on(
             'state_changed',

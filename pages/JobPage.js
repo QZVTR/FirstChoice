@@ -5,6 +5,8 @@ import { query, collection, where, getDocs, updateDoc, addDoc, Timestamp } from 
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { uuid } from 'uuidv4';
 import { useRouter } from 'next/router';
+import Compressor from 'compressorjs';
+
 const Filter = require('bad-words'),
     filter = new Filter();
 
@@ -58,6 +60,16 @@ export default function JobPage() {
         } else {
             return false
         }
+    }
+
+    const compress = file => {
+      new Compressor(file, {
+        quality: 0.6,
+  
+        success(result) {
+          setFile(result)
+        }
+      })
     }
 
     const updateUserDoc = async (imageUrl, uid) => {
@@ -146,6 +158,7 @@ export default function JobPage() {
         }
         if (file) {
           const fileRef = ref(storage, `JobPosts/${email}/${file.name}`);
+          compress(file)
           const uploadTask = uploadBytesResumable(fileRef, file)
     
           uploadTask.on('state_changed',

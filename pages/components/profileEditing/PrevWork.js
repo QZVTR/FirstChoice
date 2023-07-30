@@ -92,7 +92,7 @@ export default function PrevWork({ email }) {
 
           updateDoc(userDoc, newData)
             .then(() => {
-              alert('Document updated successfully');
+              //alert('Document updated successfully');
             })
             .catch((error) => {
               console.error(error);
@@ -121,8 +121,8 @@ export default function PrevWork({ email }) {
       const uploadPromises = files.map((file) => {
         return new Promise((resolve, reject) => {
           const fileRef = ref(storage, `previousWork/${userId}/${file.name}`);
-          setFileUp(compress(file))
-          const uploadTask = uploadBytesResumable(fileRef, fileUp);
+          //compress(file)
+          const uploadTask = uploadBytesResumable(fileRef, file);
 
           uploadTask.on(
             'state_changed',

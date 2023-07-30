@@ -121,7 +121,7 @@ export default function PrevWork({ email }) {
       const uploadPromises = files.map((file) => {
         return new Promise((resolve, reject) => {
           const fileRef = ref(storage, `previousWork/${userId}/${file.name}`);
-          setFileUp(compress(file))
+          compress(file)
           const uploadTask = uploadBytesResumable(fileRef, fileUp);
 
           uploadTask.on(

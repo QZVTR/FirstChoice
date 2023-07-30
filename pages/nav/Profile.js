@@ -176,7 +176,7 @@ export default function Profile() {
               <h4>Images of your previous work:</h4>
               <div>
                 {userData.prevWorkUrl.map((url, index) => (
-                  <img key={index} src={url} alt={`Previous work ${index}`} style={{ height: 100, width: 100 }} />
+                  <img key={index} src={url} alt={`Previous work ${index + 1}`} style={{ height: 100, width: 100 }} />
                 ))}
               </div>
             </>

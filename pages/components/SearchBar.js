@@ -15,7 +15,7 @@ export default function SearchBar() {
             </div>
                 <div className={styles.selectContainer}>
                 <div className={styles.selectWrapper}>
-                        <label className={styles.selectLabel} htmlFor='TradeType'>What type of trade are you looking for?</label>
+                        <label className={styles.selectLabel} htmlFor='TradeType'>What trade are you looking for?</label>
                         <select className={styles.select} defaultValue='Choose here' name='TradeType' onChange={(e) => setTradeType(e.target.value)}>
                             <option defaultValue='Choose here' disabled hidden>Choose here</option>
                             <option value='electrician'>Electrician</option>

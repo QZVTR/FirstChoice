@@ -6,6 +6,7 @@ import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { uuid } from 'uuidv4';
 import { useRouter } from 'next/router';
 import Compressor from 'compressorjs';
+import styles from '../styles/JobPage.module.css'
 
 const Filter = require('bad-words'),
     filter = new Filter();
@@ -26,6 +27,7 @@ export default function JobPage() {
     const jobPropertyAuthStatusRef = useRef();
     const jobBudgetRef = useRef();
     const jobTraderTypeRef = useRef();
+    const jobLocationRef = useRef();
  
     const [errorMessage, setErrorMessage] = useState("");
 
@@ -88,6 +90,7 @@ export default function JobPage() {
               jobId: jobId,
               jobTraderType: jobTraderTypeRef.current.value,
               jobDetails: jobDetailsRef.current.value,
+              jobLocation: jobLocationRef.current.value,
               jobTimeframe: jobTimeframeRef.current.value,
               jobTitle: jobTitleRef.current.value,
               jobPropertyAuthStatus: jobPropertyAuthStatusRef.current.value,
@@ -116,6 +119,7 @@ export default function JobPage() {
                 jobOwnerEmail: email,
                 jobTitle: jobTitleRef.current.value,
                 jobTraderType: jobTraderTypeRef.current.value,
+                jobLocation: jobLocationRef.current.value,
                 jobDetails: jobDetailsRef.current.value,
                 jobTimeframe: jobTimeframeRef.current.value,
                 jobPropertyAuthStatus: jobPropertyAuthStatusRef.current.value,
@@ -198,6 +202,7 @@ export default function JobPage() {
       
     return (
         <Layout>
+            <div className={styles.container}>
             <h2>Write your job post</h2>
             {badLanguage ? <div>{badLanguage}</div> : null}
             <form onSubmit={handleSubmit}>
@@ -218,6 +223,36 @@ export default function JobPage() {
                         <option value='roofer'>Roofer</option>
                         <option value='locksmith'>Locksmith</option>
                     </select>
+                </div>
+                <div>
+                  <label htmlFor='JobLocation'>Where are you located? (You do not need to give your address)</label>
+                  <select defaultValue="Choose here" name='JobLocation' ref={jobLocationRef}>
+                    <option value='Choose here' disabled hidden>Choose here</option>
+                    <option value='Cardiff'>Cardiff</option>
+                    <option value='Swansea'>Swansea</option>
+                    <option value='Newport'>Newport</option>
+                    <option value='Wrexham'>Wrexham</option>
+                    <option value='Aberystwyth'>Aberystwyth</option>
+                    <option value='Bangor'>Bangor</option>
+                    <option value='London'>London</option>
+                    <option value='Birmingham'>Birmingham</option>
+                    <option value='Manchester'>Manchester</option>
+                    <option value='Edinburgh'>Edinburgh</option>
+                    <option value='Glasgow'>Glasgow</option>
+                    <option value='Belfast'>Belfast</option>
+                    <option value='Liverpool'>Liverpool</option>
+                    <option value='Leeds'>Leeds</option>
+                    <option value='Newcastle'>Newcastle</option>
+                    <option value='Bristol'>Bristol</option>
+                    <option value='Oxford'>Oxford</option>
+                    <option value='Cambridge'>Cambridge</option>
+                    <option value='Nottingham'>Nottingham</option>
+                    <option value='Sheffield'>Sheffield</option>
+                    <option value='Leicester'>Leicester</option>
+                    <option value='York'>York</option>
+                    <option value='Southampton'>Southampton</option>
+                    <option value='Brighton'>Brighton</option>  
+                  </select>
                 </div>
                 <div>
                 <label htmlFor='jobDescription' >Tell us about the job you need doing? </label>
@@ -267,6 +302,7 @@ export default function JobPage() {
             </form>
             <div>
                 {errorMessage ? <div>{errorMessage}</div> : null}
+            </div>
             </div>
         </Layout>
     )

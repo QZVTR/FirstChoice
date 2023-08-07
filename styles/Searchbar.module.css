@@ -79,3 +79,7 @@
     justify-content: center;
     margin-bottom: 20px;
 }  
+
+.searchButton:hover {
+    background-color: #217DBB;
+}

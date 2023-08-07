@@ -125,7 +125,7 @@ export default function Profile() {
           <img src='/media/settings.svg' alt='settings' height="30" width="30" />
         </Link>
         <Link href="/components/EditProfile">
-          <img src="/media/EditProfile.jpg" alt="Edit Profile" height="30" width="30" />
+          <img src="/media/EditProfile.svg" alt="Edit Profile" height="30" width="30" />
         </Link>
         {userData.userType === 'Trader' ? (
           <div>

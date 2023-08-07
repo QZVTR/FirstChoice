@@ -18,7 +18,7 @@ export default function SpecificReviews({ id }) {
     const [accountType, setAccountType] = useState(null);
 
     const user = auth.currentUser;
-    console.log(user.email);
+    
     
     useEffect(() => {
         const fetchReviews = () => {

@@ -21,11 +21,21 @@
 .TradButton {
     margin-right: 20px;
     background-color: lightgreen;
-    border: 1px solid lightgreen;
+    border: 2px solid lightgreen;
 }
 
 .CustButton {
     margin-left: 20px;
     background-color: lightblue;
-    border: 1px solid lightblue;
+    border: 2px solid lightblue;
+}
+
+.TradButton:hover {
+    border: 2px solid #ebec13;
+    border-radius: 15px;
+}
+
+.CustButton:hover {
+    border: 2px solid #ebec13;
+    border-radius: 15px;
 }

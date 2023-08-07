@@ -9,7 +9,7 @@ export default function SignUp() {
 
     const handleSubmit = e => {
         e.preventDefault();
-        router.push(`/components/SignUp${signUpOption}`)
+        signUpOption === "Cust" ? router.push(`/components/SignUp${signUpOption}`) : router.push(`/components/PickSub`)
     }
 
     

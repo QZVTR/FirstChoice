@@ -20,22 +20,24 @@
 
 .TradButton {
     margin-right: 20px;
-    background-color: lightgreen;
-    border: 2px solid lightgreen;
+    background-color: #4DD22D;
+    border: 2px solid #4DD22D;
+    border-radius: 15px;
 }
 
 .CustButton {
     margin-left: 20px;
-    background-color: lightblue;
-    border: 2px solid lightblue;
+    background-color: #00C2FF;
+    border: 2px solid #00C2FF;
+    border-radius: 15px;
 }
 
 .TradButton:hover {
-    border: 2px solid #ebec13;
-    border-radius: 15px;
+    background-color: #71DB57;
+    border: 2px solid #71DB57;
 }
 
 .CustButton:hover {
-    border: 2px solid #ebec13;
-    border-radius: 15px;
+    background-color: #33CEFF;
+    border: 2px solid #33CEFF;
 }

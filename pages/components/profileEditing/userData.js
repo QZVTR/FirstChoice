@@ -264,6 +264,24 @@ export default function UserData() {
               </select>
           </div>
 
+          {tradeType ? <div>Please tick the services you provide:</div> : null}
+          {tradeType && Object.entries(checkboxes[tradeType]).map(([subCategory, checked]) => {
+            const name = `${tradeType}.${subCategory}`;
+            return (
+              <div key={subCategory}>
+                <label htmlFor={name}>{formatCheckboxKey(subCategory)}</label>
+                <input
+                  type="checkbox"
+                  id={name}
+                  name={name}
+                  checked={checked}
+                  onChange={handleCheckboxChange}
+                />
+              </div>
+            );
+          })}
+
+          <>
           <input placeholder='Enter first name:' onChange={(e) => setFName(e.target.value)} />
           <input placeholder='Enter surname:' onChange={(e) => setSName(e.target.value)} />
           <input
@@ -279,9 +297,10 @@ export default function UserData() {
           minLength={11}
           maxLength={11}
           type='tel'
-        />
+          />
+          </>
 
-        <input placeholder='Tell everyone about your business: ' onChange={(e) => setBio(e.target.value)}/>
+        <textarea placeholder='Tell everyone about your business: ' onChange={(e) => setBio(e.target.value)}/>
         <div>
           <label htmlFor='workLocation'>What location do you work in?</label>
           <select defaultValue='Choose here' name='workLocation' onChange={(e) => setWorkingLocation(e.target.value)}>
@@ -324,29 +343,9 @@ export default function UserData() {
             <option value='Whitchurch, Cardiff'>Whitchurch, Cardiff</option>
           </select>
         </div>
-        {tradeType ? <div>Please tick the services you provide:</div> : null}
-        {tradeType && Object.entries(checkboxes[tradeType]).map(([subCategory, checked]) => {
-          const name = `${tradeType}.${subCategory}`;
-          return (
-            <div key={subCategory}>
-              <label htmlFor={name}>{formatCheckboxKey(subCategory)}</label>
-              <input
-                type="checkbox"
-                id={name}
-                name={name}
-                checked={checked}
-                onChange={handleCheckboxChange}
-              />
-            </div>
-          );
-        })}
-
-        
         <input type='submit' value='submit' name='submit' />
         </form>
-        
       </Layout>
     );
   }
-
 }

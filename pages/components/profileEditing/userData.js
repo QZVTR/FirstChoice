@@ -14,7 +14,7 @@ export default function UserData() {
   const [bio, setBio] = useState('');
   const [companyName, setCompanyName] = useState('');
   const [tradeType, setTradeType] = useState(null);
-  const [jobsAvail, setJobsAvail] = useState('');
+  const [accType, setAccType] = useState('');
   const [workingLocation, setWorkingLocation] = useState(null);
   const [checkboxes, setCheckboxes] = useState({
     electrician: {
@@ -82,28 +82,41 @@ export default function UserData() {
 
   useEffect(() => {
     const getUsersCust = async () => {
-      const querySnapshot = await getDocs(collection(db, 'Customers'));
+      const querySnapshot = await getDocs(collection(db, 'Customers'), where('email', '==', user.email));
       const custs = [];
+
+      if (querySnapshot.empty) {
+
+      }
+
       querySnapshot.forEach((doc) => {
         custs.push(doc.data().email);
+        setAccType('Customer')
       });
       setCustUsers(custs);
     };
-
-    getUsersCust();
+    if (user) {
+      console.log('Cust call')
+      getUsersCust();
+    }
+    
   }, [user]);
 
   useEffect(() => {
     const getUsersTrade = async () => {
-      const querySnapshot = await getDocs(collection(db, 'Traders'));
+      const querySnapshot = await getDocs(collection(db, 'Traders'), where('email', '==', user.email));
       const traders = [];
       querySnapshot.forEach((doc) => {
         traders.push(doc.data().email);
+        setAccType('Trader')
       });
       setTradeUsers(traders);
     };
-
-    getUsersTrade();
+    if (!accType) {
+      console.log('trader call')
+      getUsersTrade();
+    }
+      
   }, [user]);
 
   const handleSubmitCust = (e) => {

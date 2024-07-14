@@ -1,6 +1,6 @@
 # FirstChoice
 
-## Todo for MVP:
+## Todo:
 
 1. Homepage with all traders or clients:
    - If no one logged in show traders
@@ -8,20 +8,7 @@
    - if trader logged in show clients who need specific work
 2. Sort out images for profiles 
    - Profile images
-   -  Images of work done (after mvp)
-3. Reviews
-   - Be able to leave reviews on a trader
-   - leave reviews on a client this will probs be after mvp 
+   -  Images of work done
 4. All styling of site
 5. Subscriptions
 6. FAQ Page
-7. a seaech bar so the client doesnt have to scroll throughout our website go find a specific trader. E.g  searched electricion snd all fof the electricion come up 
-
-- [ ] 1
-- [ ] 2
-- [ ] 3
-- [ ] 4
-- [ ] 5
-- [ ] 6
-
-There maybe other things which im forgetting so just add if you can think of any.
